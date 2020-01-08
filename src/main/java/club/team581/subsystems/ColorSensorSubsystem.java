@@ -24,8 +24,8 @@ public class ColorSensorSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println("[ColorSensorSubsystem] \u001b[31mRed " + Integer.toString(this.sensor.getRed()));
-    System.out.println("[ColorSensorSubsystem] \u001b[32mGreen " + Integer.toString(this.sensor.getGreen()));
-    System.out.println("[ColorSensorSubsystem] \u001b[34mBlue " + Integer.toString(this.sensor.getBlue()));
+    System.out.println("[ColorSensorSubsystem] \u001b[31mRed " + Integer.toString(this.sensor.getRed()) + "\u001b[0m");
+    System.out.println("[ColorSensorSubsystem] \u001b[32mGreen " + Integer.toString(this.sensor.getGreen()) + "\u001b[0m");
+    System.out.println("[ColorSensorSubsystem] \u001b[34mBlue " + Integer.toString(this.sensor.getBlue()) + "\u001b[0m");
   }
 }
