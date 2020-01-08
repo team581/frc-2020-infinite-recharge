@@ -29,5 +29,5 @@ jobs:
       - name: Upload jar
         uses: actions/upload-artifact@master
         with:
-          name: frc-2020-infinite-recharge.jar
+          name: Generated JarFile
           path: ./build/libs/frc-2020-infinite-recharge.jar
