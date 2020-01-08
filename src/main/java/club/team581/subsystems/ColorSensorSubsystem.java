@@ -13,7 +13,7 @@ import club.team581.Constants.PORTS;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorSensorSubsystem extends SubsystemBase {
-  private ColorSensorV3 sensor;
+  public final ColorSensorV3 sensor;
 
   /**
    * Creates a new ColorSensorSubsystem.
@@ -24,6 +24,8 @@ public class ColorSensorSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    System.out.println("[ColorSensorSubsystem] \u001b[31mRed " + Integer.toString(this.sensor.getRed()));
+    System.out.println("[ColorSensorSubsystem] \u001b[32mGreen " + Integer.toString(this.sensor.getGreen()));
+    System.out.println("[ColorSensorSubsystem] \u001b[34mBlue " + Integer.toString(this.sensor.getBlue()));
   }
 }
