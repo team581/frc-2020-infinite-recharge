@@ -7,6 +7,8 @@
 
 package club.team581;
 
+import edu.wpi.first.wpilibj.I2C.Port;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -16,4 +18,10 @@ package club.team581;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  /**
+   * Ports on the RoboRIO.
+   */
+  public final static class PORTS {
+    final static public Port COLOR_SENSOR = Port.kOnboard;
+  }
 }
