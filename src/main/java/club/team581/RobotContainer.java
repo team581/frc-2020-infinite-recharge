@@ -7,10 +7,11 @@
 
 package club.team581;
 
+import club.team581.commands.ExampleCommand;
+import club.team581.subsystems.ColorSensorSubsystem;
+import club.team581.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import club.team581.commands.ExampleCommand;
-import club.team581.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -25,7 +26,7 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-
+  public final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
