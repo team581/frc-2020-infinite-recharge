@@ -7,7 +7,9 @@
 
 package club.team581;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -21,6 +23,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  public final XboxController controller = new XboxController(Constants.PORTS.CONTROLLER);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -96,6 +100,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    this.m_robotContainer.driveSubsystem.mecanumDrive.driveCartesian(this.controller.getY(Hand.kRight), this.controller.getX(Hand.kRight), this.controller.getX(Hand.kLeft));
   }
 
   @Override

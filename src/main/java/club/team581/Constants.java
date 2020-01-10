@@ -19,9 +19,18 @@ import edu.wpi.first.wpilibj.I2C.Port;
  */
 public final class Constants {
   /**
-   * Ports on the RoboRIO.
+   * Ports on the RoboRIO and on the computer.
    */
   public final static class PORTS {
     final static public Port COLOR_SENSOR = Port.kOnboard;
+
+    final static public int CONTROLLER = 0;
+
+    public final static class MOTORS {
+      final static public int FRONT_RIGHT = 0;
+      final static public int FRONT_LEFT = 0;
+      final static public int BACK_RIGHT = 0;
+      final static public int BACK_LEFT = 0;
+    }
   }
 }
