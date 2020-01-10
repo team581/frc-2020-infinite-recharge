@@ -13,14 +13,7 @@ import club.team581.Constants.PORTS;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorSensorSubsystem extends SubsystemBase {
-  public final ColorSensorV3 sensor;
-
-  /**
-   * Creates a new ColorSensorSubsystem.
-   */
-  public ColorSensorSubsystem() {
-    this.sensor = new ColorSensorV3(PORTS.COLOR_SENSOR);
-  }
+  public final ColorSensorV3 sensor= new ColorSensorV3(PORTS.COLOR_SENSOR);
 
   @Override
   public void periodic() {
