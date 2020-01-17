@@ -9,7 +9,9 @@ package club.team581;
 
 import club.team581.util.ShuffleboardLogger;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -26,6 +28,9 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
+
+  private final XboxController controller = this.m_robotContainer.controller;
+  private final MecanumDrive drive = this.m_robotContainer.driveSubsystem.mecanumDrive;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -59,8 +64,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    shuffleboard.logJoystickValues(this.m_robotContainer.controller.getX(Hand.kRight),
-        -this.m_robotContainer.controller.getY(Hand.kRight), this.m_robotContainer.controller.getX(Hand.kLeft));
+    shuffleboard.logJoystickValues(controller.getX(Hand.kRight), -controller.getY(Hand.kRight),
+        controller.getX(Hand.kLeft));
   }
 
   /**
@@ -111,9 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    this.m_robotContainer.driveSubsystem.mecanumDrive.driveCartesian(
-        -this.m_robotContainer.controller.getX(Hand.kRight), this.m_robotContainer.controller.getY(Hand.kRight),
-        this.m_robotContainer.controller.getX(Hand.kLeft));
+    drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
   }
 
   @Override
