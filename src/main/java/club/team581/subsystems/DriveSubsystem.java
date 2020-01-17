@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveSubsystem extends SubsystemBase {
   public final WPI_TalonFX frontRightMotor = new WPI_TalonFX(Constants.PORTS.MOTORS.FRONT_RIGHT);
   public final WPI_TalonFX frontLeftMotor = new WPI_TalonFX(Constants.PORTS.MOTORS.FRONT_LEFT);
-  public final WPI_TalonFX backRightMotor = new WPI_TalonFX(Constants.PORTS.MOTORS.BACK_LEFT);
-  public final WPI_TalonFX backLeftMotor = new WPI_TalonFX(Constants.PORTS.MOTORS.BACK_RIGHT);
-  public final MecanumDrive mecanumDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+  public final WPI_TalonFX rearRightMotor = new WPI_TalonFX(Constants.PORTS.MOTORS.REAR_RIGHT);
+  public final WPI_TalonFX rearLeftMotor = new WPI_TalonFX(Constants.PORTS.MOTORS.REAR_LEFT);
+  public final MecanumDrive mecanumDrive = new MecanumDrive(frontLeftMotor, rearLeftMotor, frontRightMotor,
+      rearRightMotor);
 }

@@ -49,7 +49,7 @@ public class ColorSensorSubsystem extends SubsystemBase {
     // Avoid reporting on values that are inaccurate (like if we are nowhere near
     // the control panel)
     // The default value is 0.95
-    this.colorMatcher.setConfidenceThreshold(0.75);
+    this.colorMatcher.setConfidenceThreshold(0.85);
   }
 
   @Override
@@ -73,6 +73,7 @@ public class ColorSensorSubsystem extends SubsystemBase {
     }
 
     Robot.shuffleboard.recognizedColor.setString(colorString);
+    Robot.shuffleboard.colorConfidence.setDouble(match.confidence);
   }
 
   public static int rotationsToDesiredColor(ControlPanelColors current, ControlPanelColors desired) {

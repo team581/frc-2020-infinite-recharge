@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    shuffleboard.logJoystickValues(controller.getX(Hand.kRight), controller.getY(Hand.kRight),
+    shuffleboard.logJoystickValues(controller.getX(Hand.kRight), -controller.getY(Hand.kRight),
         controller.getX(Hand.kLeft));
   }
 
@@ -114,8 +114,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    this.m_robotContainer.driveSubsystem.mecanumDrive.driveCartesian(this.controller.getY(Hand.kRight),
-        this.controller.getX(Hand.kRight), this.controller.getX(Hand.kLeft));
+    this.m_robotContainer.driveSubsystem.mecanumDrive.driveCartesian(-this.controller.getX(Hand.kRight),
+        this.controller.getY(Hand.kRight), this.controller.getX(Hand.kLeft));
   }
 
   @Override

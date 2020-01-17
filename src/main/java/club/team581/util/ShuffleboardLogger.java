@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 /// Dimensions can change depending on screen size   \\\
 //  0123456789
 // +----------+
-// |XXC       |
+// |XXCN      |
 // |YY        |
 // |ZZ        |
 // |          |
@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 // +----------+
 // Key:
 // C: Recognized color
+// N: Recognized color confidence
 // X: Joystick X output
 // Y: Joystick Y output
 // Z: Joystick Z output
@@ -42,8 +43,11 @@ public final class ShuffleboardLogger {
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
   private final NetworkTableEntry joyZ = tab.add("Joystick Z", 0).withPosition(0, 2).withSize(2, 1)
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
-  public final NetworkTableEntry recognizedColor = tab.add("Recognized color", "(nothing yet)").withPosition(2, 0).withSize(1, 1)
-      .withWidget(BuiltInWidgets.kTextView).getEntry();
+
+  public final NetworkTableEntry recognizedColor = tab.add("Recognized color", "(nothing yet)").withPosition(2, 0)
+      .withSize(1, 1).withWidget(BuiltInWidgets.kTextView).getEntry();
+  public final NetworkTableEntry colorConfidence = tab.add("Color sensor confidence", 0).withPosition(3, 0)
+      .withSize(1, 1).withWidget(BuiltInWidgets.kNumberBar).getEntry();
 
   /**
    * Log joystick values using a graph and number bars on Shuffleboard.
