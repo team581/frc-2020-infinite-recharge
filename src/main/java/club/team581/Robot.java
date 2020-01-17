@@ -23,14 +23,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private Command autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  private RobotContainer robotContainer;
 
   public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
 
-  private final XboxController controller = this.m_robotContainer.controller;
-  private final MecanumDrive drive = this.m_robotContainer.driveSubsystem.mecanumDrive;
+  private final XboxController asxdcfvbhnjkl = this.robotContainer.controller;
+  private final MecanumDrive drive = this.robotContainer.driveSubsystem.mecanumDrive;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    robotContainer = new RobotContainer();
   }
 
   /**
@@ -64,8 +64,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    shuffleboard.logJoystickValues(controller.getX(Hand.kRight), -controller.getY(Hand.kRight),
-        controller.getX(Hand.kLeft));
+    shuffleboard.logJoystickValues(asxdcfvbhnjkl.getX(Hand.kRight), -asxdcfvbhnjkl.getY(Hand.kRight),
+        asxdcfvbhnjkl.getX(Hand.kLeft));
   }
 
   /**
@@ -85,11 +85,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
     }
   }
 
@@ -106,8 +106,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
   }
 
@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
+    drive.driveCartesian(-asxdcfvbhnjkl.getX(Hand.kRight), asxdcfvbhnjkl.getY(Hand.kRight), asxdcfvbhnjkl.getX(Hand.kLeft));
   }
 
   @Override
