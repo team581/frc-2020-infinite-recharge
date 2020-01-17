@@ -9,9 +9,9 @@ package club.team581;
 
 import club.team581.util.ShuffleboardLogger;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 
   public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
 
-  private final XboxController asxdcfvbhnjkl = this.robotContainer.controller;
+  private final XboxController controller = this.robotContainer.controller;
   private final MecanumDrive drive = this.robotContainer.driveSubsystem.mecanumDrive;
 
   /**
@@ -64,8 +64,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    shuffleboard.logJoystickValues(asxdcfvbhnjkl.getX(Hand.kRight), -asxdcfvbhnjkl.getY(Hand.kRight),
-        asxdcfvbhnjkl.getX(Hand.kLeft));
+    shuffleboard.logJoystickValues(controller.getX(Hand.kRight), -controller.getY(Hand.kRight),
+        controller.getX(Hand.kLeft));
   }
 
   /**
@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    drive.driveCartesian(-asxdcfvbhnjkl.getX(Hand.kRight), asxdcfvbhnjkl.getY(Hand.kRight), asxdcfvbhnjkl.getX(Hand.kLeft));
+    drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
   }
 
   @Override
