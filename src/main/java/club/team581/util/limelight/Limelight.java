@@ -52,7 +52,9 @@ public final class Limelight {
      * The pipeline’s latency contribution (ms) Add at least 11ms for image capture
      * latency.
      */
-    public final static double latency()  {return ntTable.getEntry("tl").getDouble(-1)};
+    public final static double latency() {
+      return ntTable.getEntry("tl").getDouble(-1);
+    };
 
     /** Sidelength of shortest side of the fitted bounding box (pixels) */
     public final static double shortestSideLength() {
