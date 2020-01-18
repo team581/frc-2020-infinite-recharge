@@ -45,7 +45,7 @@ public final class Limelight {
 
     /** Skew or rotation (-90 degrees to 0 degrees) */
     public final static double skew() {
-      return ntTable.getEntry("tl").getDouble(0);
+      return ntTable.getEntry("ts").getDouble(0);
     };
 
     /**
@@ -63,7 +63,7 @@ public final class Limelight {
 
     /** Sidelength of longest side of the fitted bounding box (pixels) */
     public final static double longestSideLength() {
-      return ntTable.getEntry("tshort").getDouble(-1);
+      return ntTable.getEntry("tlong").getDouble(-1);
     };
 
     /** Horizontal sidelength of the rough bounding box (0 - 320 pixels) */
