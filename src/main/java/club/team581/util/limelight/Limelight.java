@@ -30,7 +30,7 @@ public final class Limelight {
 
     /** `-29.8` to `29.8` degrees. */
     public final static double horizontalOffset() {
-      return ntTable.getEntry("tv").getDouble(0);
+      return ntTable.getEntry("tx").getDouble(0);
     };
 
     /** `-24.85` to `24.85` degrees. */
