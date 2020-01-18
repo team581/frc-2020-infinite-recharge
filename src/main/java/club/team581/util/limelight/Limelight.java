@@ -87,22 +87,34 @@ public final class Limelight {
        */
       public static enum LEDMode {
         /** Use the LED Mode set in the current pipeline */
-        USE_CURRENT_PIPELINE,
+        USE_CURRENT_PIPELINE(0),
         /** Force off */
-        OFF,
+        OFF(1),
         /** Force blink */
-        BLINK,
+        BLINK(2),
         /** Force on */
-        ON
+        ON(3);
+
+        public final int value;
+
+        LEDMode(int value) {
+          this.value = value;
+        }
       }
 
       /**
        * Sets limelight’s operation mode.
        */
       public static enum CameraMode {
-        VISION_PROCESSOR,
+        VISION_PROCESSOR(0),
         /** Driver Camera (Increases exposure, disables vision processing) */
-        RAW
+        RAW(1);
+
+        public final int value;
+
+        CameraMode(int value) {
+          this.value = value;
+        }
       }
 
       /**
@@ -110,17 +122,23 @@ public final class Limelight {
        */
       public static enum Stream {
         /** Standard - Side-by-side streams if a webcam is attached to Limelight */
-        STANDARD,
+        STANDARD(0),
         /**
          * PiP Main - The secondary camera stream is placed in the lower-right corner of
          * the primary camera stream
          */
-        PICTURE_IN_PICTURE_MAIN,
+        PICTURE_IN_PICTURE_MAIN(1),
         /**
          * PiP Secondary - The primary camera stream is placed in the lower-right corner
          * of the secondary camera stream
          */
-        PICTURE_IN_PICTURE_SECONDARY
+        PICTURE_IN_PICTURE_SECONDARY(2);
+
+        public final int value;
+
+        Stream(int value) {
+          this.value = value;
+        }
       }
 
       /**
@@ -128,9 +146,15 @@ public final class Limelight {
        */
       public static enum Snapshot {
         /** Stop taking snapshots. */
-        STOP,
+        STOP(0),
         /** Take two snapshots per second. */
-        TWO_PER_SECOND
+        TWO_PER_SECOND(1);
+
+        public final int value;
+
+        Snapshot(int value) {
+          this.value = value;
+        }
       }
     }
   }
