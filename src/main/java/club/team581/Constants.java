@@ -35,4 +35,8 @@ public final class Constants {
       final static public int REAR_LEFT = 2;
     }
   }
+
+  public final static class LIMELIGHT {
+    final static public String NETWORK_TABLES_TABLE = "limelight";
+  }
 }
