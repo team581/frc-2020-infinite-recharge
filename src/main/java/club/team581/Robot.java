@@ -29,8 +29,8 @@ public class Robot extends TimedRobot {
 
   public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
 
-  private final XboxController controller = this.robotContainer.controller;
-  private final MecanumDrive drive = this.robotContainer.driveSubsystem.mecanumDrive;
+  private final XboxController controller = RobotContainer.controller;
+  private final MecanumDrive drive = RobotContainer.driveSubsystem.mecanumDrive;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -114,9 +114,20 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during operator control.
    */
+  public static double LimelightDriveCommand = 0.0;
+  public static double LimelightSteerCommand = 0.0;
+
   @Override
   public void teleopPeriodic() {
-    drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
+    boolean useLimelight = controller.getAButton();
+    
+    if (useLimelight){
+      
+      drive.driveCartesian(0.0, LimelightDriveCommand, LimelightSteerCommand);
+    }
+    else {
+      drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
+    }
   }
 
   @Override

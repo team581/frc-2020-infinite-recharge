@@ -29,9 +29,9 @@ public class RobotContainer {
   private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
 
   public final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
-  public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
 
-  public final XboxController controller = new XboxController(Constants.PORTS.CONTROLLER);
+  public final static XboxController controller = new XboxController(Constants.PORTS.CONTROLLER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

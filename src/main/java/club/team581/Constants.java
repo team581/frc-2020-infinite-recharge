@@ -38,5 +38,11 @@ public final class Constants {
 
   public final static class LIMELIGHT {
     final static public String NETWORK_TABLES_TABLE = "limelight";
+    public final static class MOVEMENT {
+      final static public double STEER_SPEED = 0.05;       // Strength of turning
+      final static public double DRIVE_SPEED = 0.25;       // Strength of driving forwards and backwards
+      final static public double TARGET_AREA_SIZE = 30;     // Maximum area of the target
+      final static public double MAX_DRIVE_SPEED = 0.7;     // Speed limit so we don't drive too fast
+    }
   }
 }
