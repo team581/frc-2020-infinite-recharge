@@ -36,8 +36,20 @@ public final class Constants {
     }
   }
 
+  public final static class FIELD {
+    /** This is in feet */
+    // Sourced from page 30 of the 2020 FRC manual
+    final static public double POWER_PORT_HEIGHT = 8.1875;
+  }
+
   public final static class LIMELIGHT {
     final static public String NETWORK_TABLES_TABLE = "limelight";
+
+    public final static class MEASUREMENTS {
+      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 1;
+      final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 1;
+    }
+
     public final static class MOVEMENT {
       final static public double STEER_SPEED = 0.05;       // Strength of turning
       final static public double DRIVE_SPEED = 0.25;       // Strength of driving forwards and backwards

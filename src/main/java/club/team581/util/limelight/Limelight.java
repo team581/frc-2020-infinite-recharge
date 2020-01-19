@@ -22,6 +22,11 @@ public final class Limelight {
     private final static NetworkTable ntTable = NetworkTableInstance.getDefault()
         .getTable(LIMELIGHT.NETWORK_TABLES_TABLE);
 
+    public final static double distanceToTarget(double limelightAngleOfElevation, double targetHeightFromFloor) {
+      return (targetHeightFromFloor - LIMELIGHT.MEASUREMENTS.LIMELIGHT_HEIGHT_FROM_FLOOR)
+          / Math.tan(limelightAngleOfElevation + verticalOffset());
+    }
+
     // public final static boolean targetsExist =
     // ntTable.getEntry("tv").getDouble(0) == 1;
     public final static boolean targetsExist() {
