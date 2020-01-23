@@ -7,17 +7,23 @@
 
 package club.team581.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import club.team581.subsystems.DriveSubsystem;
-import club.team581.util.limelight.Limelight;
-import club.team581.Robot;
 import club.team581.Constants.LIMELIGHT.MOVEMENT;
+import club.team581.Robot;
+import club.team581.util.limelight.Limelight;
+import club.team581.util.limelight.VisionTarget;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class LimelightMovingCommand extends CommandBase {
+  private final VisionTarget visionTarget;
+  private final double limelightAngleOfElevation;
+  private boolean finished = false;
+
   /**
    * Creates a new LimelightMovingCommand.
    */
-  public LimelightMovingCommand(final DriveSubsystem drive) {
+  public LimelightMovingCommand(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
+    this.visionTarget = visionTarget;
+    this.limelightAngleOfElevation = limelightAngleOfElevation;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,32 +33,46 @@ public class LimelightMovingCommand extends CommandBase {
 
   }
 
+  private double limitToMaxSpeed(double value, double absoluteMaxValue) {
+    return Math.max(-absoluteMaxValue, Math.min(value, absoluteMaxValue));
+  }
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     // Start with the steering
-    double steerCmd = Limelight.NetworkTables.horizontalOffset() * MOVEMENT.STEER_SPEED;
-    Robot.LimelightSteerCommand = steerCmd;
+    final double steerCmd = Limelight.NetworkTables.horizontalOffset() * MOVEMENT.STEER_SPEED;
+    Robot.LimelightSteerCommand = limitToMaxSpeed(steerCmd, 0.25);
+
+    final double distance = Limelight.distanceToTarget(this.limelightAngleOfElevation, visionTarget);
+
+    if (distance == -1) {
+      this.finished = true;
+      Robot.LimelightDriveCommand = 0;
+      Robot.LimelightSteerCommand = 0;
+      return;
+    }
 
     // Try to drive towards the target
-    double driveCmd = (MOVEMENT.TARGET_AREA_SIZE - Limelight.NetworkTables.targetArea()) * MOVEMENT.DRIVE_SPEED;
+    double driveCmd = (visionTarget.desiredDistance - distance) * MOVEMENT.DRIVE_SPEED;
 
-    // If it goes too quick, slow down drive speed
-    if (driveCmd > MOVEMENT.MAX_DRIVE_SPEED) {
-      driveCmd = MOVEMENT.MAX_DRIVE_SPEED;
-    }
-    Robot.LimelightDriveCommand = driveCmd;
+    Robot.LimelightDriveCommand = limitToMaxSpeed(driveCmd, MOVEMENT.MAX_DRIVE_SPEED);
+    System.out.println("distance: " + distance + " drive: " + String.valueOf(Robot.LimelightDriveCommand) + " steer:" + String.valueOf(Robot.LimelightSteerCommand));
+    this.finished = false;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(final boolean interrupted) {
+    if (interrupted) {
+      Robot.LimelightDriveCommand = 0;
+      Robot.LimelightSteerCommand = 0;
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

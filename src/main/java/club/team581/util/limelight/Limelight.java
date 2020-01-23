@@ -12,20 +12,24 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
- * @see https://docs.limelightvision.io/en/latest/networktables_api.html
+ * @see https://docs.limelightvision.io
  */
 public final class Limelight {
+  public final static double distanceToTarget(double limelightAngleOfElevation, VisionTarget visionTarget) {
+    if (!NetworkTables.targetsExist()) {
+      return -1;
+    }
+
+    return (visionTarget.height - LIMELIGHT.MEASUREMENTS.LIMELIGHT_HEIGHT_FROM_FLOOR)
+        / Math.tan((limelightAngleOfElevation + NetworkTables.verticalOffset()) * (Math.PI / 180));
+  }
+
   /**
-   * Ports on the RoboRIO and on the computer.
+   * @see https://docs.limelightvision.io/en/latest/networktables_api.html
    */
   public final static class NetworkTables {
     private final static NetworkTable ntTable = NetworkTableInstance.getDefault()
         .getTable(LIMELIGHT.NETWORK_TABLES_TABLE);
-
-    public final static double distanceToTarget(double limelightAngleOfElevation, double targetHeightFromFloor) {
-      return (targetHeightFromFloor - LIMELIGHT.MEASUREMENTS.LIMELIGHT_HEIGHT_FROM_FLOOR)
-          / Math.tan(limelightAngleOfElevation + verticalOffset());
-    }
 
     // public final static boolean targetsExist =
     // ntTable.getEntry("tv").getDouble(0) == 1;

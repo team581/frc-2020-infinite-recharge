@@ -8,12 +8,14 @@
 package club.team581;
 
 import club.team581.commands.ExampleCommand;
+import club.team581.commands.LimelightMovingCommand;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
 import club.team581.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -48,6 +50,13 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    final JoystickButton aButton = new JoystickButton(controller, XboxController.Button.kA.value);
+    final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
+
+    aButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
+        Constants.LIMELIGHT.TARGETS.LoadingBay));
+    bButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
+        Constants.LIMELIGHT.TARGETS.PowerPort));
   }
 
   /**

@@ -111,22 +111,18 @@ public class Robot extends TimedRobot {
     }
   }
 
+  public static double LimelightDriveCommand = 0;
+  public static double LimelightSteerCommand = 0;
+
   /**
    * This function is called periodically during operator control.
    */
-  public static double LimelightDriveCommand = 0.0;
-  public static double LimelightSteerCommand = 0.0;
-
   @Override
   public void teleopPeriodic() {
-    boolean useLimelight = controller.getAButton();
-    
-    if (useLimelight){
-      
-      drive.driveCartesian(0.0, LimelightDriveCommand, LimelightSteerCommand);
-    }
-    else {
+    if (LimelightDriveCommand == 0 && LimelightSteerCommand == 0) {
       drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
+    } else {
+      drive.driveCartesian(0, LimelightDriveCommand, LimelightSteerCommand);
     }
   }
 

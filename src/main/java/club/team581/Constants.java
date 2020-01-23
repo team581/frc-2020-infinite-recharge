@@ -7,6 +7,7 @@
 
 package club.team581;
 
+import club.team581.util.limelight.VisionTarget;
 import edu.wpi.first.wpilibj.I2C.Port;
 
 /**
@@ -46,15 +47,22 @@ public final class Constants {
     final static public String NETWORK_TABLES_TABLE = "limelight";
 
     public final static class MEASUREMENTS {
-      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 1;
-      final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 1;
+      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 9;
+      final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 0;
     }
 
     public final static class MOVEMENT {
-      final static public double STEER_SPEED = 0.05;       // Strength of turning
-      final static public double DRIVE_SPEED = 0.25;       // Strength of driving forwards and backwards
-      final static public double TARGET_AREA_SIZE = 30;     // Maximum area of the target
-      final static public double MAX_DRIVE_SPEED = 0.7;     // Speed limit so we don't drive too fast
+      /** Strength of turning. */
+      final static public double STEER_SPEED = 0.05;
+      /** Strength of driving forwards and backwards. */
+      final static public double DRIVE_SPEED = 0.25;
+      /** Speed limit so we don't drive too fast. */
+      final static public double MAX_DRIVE_SPEED = 0.35;
+    }
+
+    public final static class TARGETS {
+      final static public VisionTarget LoadingBay = new VisionTarget(24, 11, 0);
+      final static public VisionTarget PowerPort = new VisionTarget(60, 81.25, 1);
     }
   }
 }
