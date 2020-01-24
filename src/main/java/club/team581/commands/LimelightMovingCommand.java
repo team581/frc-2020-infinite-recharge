@@ -48,8 +48,8 @@ public class LimelightMovingCommand extends CommandBase {
 
     if (distance == -1) {
       this.finished = true;
-      Robot.LimelightDriveCommand = 0;
-      Robot.LimelightSteerCommand = 0;
+
+      this.interrupt();
       return;
     }
 
@@ -57,7 +57,8 @@ public class LimelightMovingCommand extends CommandBase {
     double driveCmd = (visionTarget.desiredDistance - distance) * MOVEMENT.DRIVE_SPEED;
 
     Robot.LimelightDriveCommand = limitToMaxSpeed(driveCmd, MOVEMENT.MAX_DRIVE_SPEED);
-    System.out.println("distance: " + distance + " drive: " + String.valueOf(Robot.LimelightDriveCommand) + " steer:" + String.valueOf(Robot.LimelightSteerCommand));
+    System.out.println("distance: " + distance + " drive: " + String.valueOf(Robot.LimelightDriveCommand) + " steer:"
+        + String.valueOf(Robot.LimelightSteerCommand));
     this.finished = false;
   }
 
@@ -65,9 +66,14 @@ public class LimelightMovingCommand extends CommandBase {
   @Override
   public void end(final boolean interrupted) {
     if (interrupted) {
-      Robot.LimelightDriveCommand = 0;
-      Robot.LimelightSteerCommand = 0;
+      this.interrupt();
     }
+  }
+
+  /** Disable the drive commands and stop the robot. */
+  private void interrupt() {
+    Robot.LimelightDriveCommand = 0;
+    Robot.LimelightSteerCommand = 0;
   }
 
   // Returns true when the command should end.
