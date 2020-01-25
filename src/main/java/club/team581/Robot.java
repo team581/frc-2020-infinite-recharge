@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (LimelightDriveCommand == 0 && LimelightSteerCommand == 0) {
-      drive.driveCartesian(-controller.getX(Hand.kRight), controller.getY(Hand.kRight), controller.getX(Hand.kLeft));
+      drive.driveCartesian(-controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight));
     } else {
       drive.driveCartesian(0, LimelightDriveCommand, LimelightSteerCommand);
     }
