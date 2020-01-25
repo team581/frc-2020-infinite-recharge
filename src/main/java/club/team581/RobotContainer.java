@@ -8,7 +8,7 @@
 package club.team581;
 
 import club.team581.commands.LimelightMovingCommand;
-import club.team581.commands.MoveArm;
+import club.team581.commands.MoveArmCommand;
 import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
@@ -66,7 +66,7 @@ public class RobotContainer {
       } else {
         leftTriggerAxis = controller.getTriggerAxis(Hand.kLeft);
       }
-      new MoveArm(leftTriggerAxis);
+      new MoveArmCommand(leftTriggerAxis);
     }
   }
 

@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class MoveArm extends ParallelCommandGroup {
+public class MoveArmCommand extends ParallelCommandGroup {
   double speed = 0;
 
   /**
    * Creates a new MoveArm.
    */
-  public MoveArm(double armSpeed) {
+  public MoveArmCommand(double armSpeed) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
     super(new MoveMotor(ArmSubsystem.armMotor1, armSpeed), new MoveMotor(ArmSubsystem.armMotor2, -armSpeed));
