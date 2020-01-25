@@ -56,7 +56,7 @@ public final class Constants {
     final static public String NETWORK_TABLES_TABLE = "limelight";
 
     public final static class MEASUREMENTS {
-      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 9;
+      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.75;
       final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 0;
     }
 
@@ -70,7 +70,7 @@ public final class Constants {
     }
 
     public final static class TARGETS {
-      final static public VisionTarget LoadingBay = new VisionTarget(24, 11, 0);
+      final static public VisionTarget LoadingBay = new VisionTarget(15, 11, 0);
       final static public VisionTarget PowerPort = new VisionTarget(60, 81.25, 1);
     }
   }
