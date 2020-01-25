@@ -34,7 +34,16 @@ public final class Constants {
       final static public int FRONT_LEFT = 1;
       final static public int REAR_RIGHT = 4;
       final static public int REAR_LEFT = 2;
+
+    final static public int ARM_MOTOR1 = 0;
+    final static public int ARM_ENCODER1 = 0;
+    final static public int ARM_MOTOR2 = 0;
+    final static public int ARM_ENCODER2 = 0; 
+
+    final static public int WINCH_MOTOR1 = 0;
+    final static public int WINCH_MOTOR2 = 1;
     }
+
   }
 
   public final static class FIELD {
