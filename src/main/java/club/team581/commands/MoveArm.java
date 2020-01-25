@@ -7,15 +7,15 @@
 
 package club.team581.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import club.team581.subsystems.ArmSubsystem;
-import club.team581.commands.MoveMotor;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class MoveArm extends ParallelCommandGroup {
   double speed = 0;
+
   /**
    * Creates a new MoveArm.
    */
@@ -23,6 +23,5 @@ public class MoveArm extends ParallelCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
     super(new MoveMotor(ArmSubsystem.armMotor1, armSpeed), new MoveMotor(ArmSubsystem.armMotor2, -armSpeed));
-
   }
 }
