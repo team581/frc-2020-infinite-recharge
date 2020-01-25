@@ -9,11 +9,13 @@ package club.team581;
 
 import club.team581.commands.ExampleCommand;
 import club.team581.commands.LimelightMovingCommand;
+import club.team581.commands.MoveArm;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
 import club.team581.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -57,6 +59,16 @@ public class RobotContainer {
         Constants.LIMELIGHT.TARGETS.LoadingBay));
     bButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
         Constants.LIMELIGHT.TARGETS.PowerPort));
+
+    double leftTriggerAxis = 0;
+    if (controller.getTriggerAxis(Hand.kLeft) > 0){
+      if (controller.getTriggerAxis(Hand.kLeft) >= 0.7){
+        leftTriggerAxis = 0.7;
+      } else {
+        leftTriggerAxis = controller.getTriggerAxis(Hand.kLeft);
+      }
+      new MoveArm(leftTriggerAxis);
+    } 
   }
 
   /**
