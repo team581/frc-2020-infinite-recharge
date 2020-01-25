@@ -8,7 +8,9 @@
 package club.team581.util.limelight;
 
 import club.team581.Constants.LIMELIGHT;
+import club.team581.util.limelight.Limelight.NetworkTables.Constants.CameraMode;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
@@ -89,6 +91,26 @@ public final class Limelight {
     public final static double currentPipelineIndex() {
       return ntTable.getEntry("getpipe").getDouble(0);
     };
+
+    public final static boolean setPipelineIndex(int index) {
+      return ntTable.getEntry("pipeline").setNumber(index);
+    }
+
+    public final static CameraMode imageProcessingMode() {
+      final int currentCameraModeEnum = ntTable.getEntry("camMode").getNumber(0).intValue();
+
+      if (currentCameraModeEnum == CameraMode.RAW.value) {
+        return CameraMode.RAW;
+      } else {
+        return CameraMode.VISION_PROCESSOR;
+      }
+    }
+
+    public final static boolean setImageProcessingMode(CameraMode mode) {
+      final NetworkTableEntry camMode = ntTable.getEntry("camMode");
+
+      return camMode.setNumber(mode.value);
+    }
 
     public final static class Constants {
       /**
