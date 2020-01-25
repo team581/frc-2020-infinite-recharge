@@ -7,21 +7,24 @@
 
 package club.team581.commands;
 
-import club.team581.subsystems.ArmSubsystem;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class MoveArmCommand extends ParallelCommandGroup {
-  double speed = 0;
+public class MoveMotorCommand extends InstantCommand {
+  private final double speed;
+  private final SpeedController motor;
 
-  /**
-   * Creates a new MoveArm.
-   */
-  public MoveArmCommand(double armSpeed) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
-    super(new MoveMotor(ArmSubsystem.armMotor1, armSpeed), new MoveMotor(ArmSubsystem.armMotor2, -armSpeed));
+  public MoveMotorCommand(SpeedController motor, double speed) {
+    this.motor = motor;
+    this.speed = speed;
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    this.motor.set(this.speed);
   }
 }
