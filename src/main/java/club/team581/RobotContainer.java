@@ -7,12 +7,10 @@
 
 package club.team581;
 
-import club.team581.commands.ExampleCommand;
 import club.team581.commands.LimelightMovingCommand;
 import club.team581.commands.MoveArm;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
-import club.team581.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -27,10 +25,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
+  private final LimelightMovingCommand autoCommand = new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
+  Constants.LIMELIGHT.TARGETS.PowerPort);
 
   public final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
