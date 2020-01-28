@@ -13,6 +13,7 @@ import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ArmSubsystem;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
+import club.team581.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,7 +33,7 @@ public class RobotContainer {
   public final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
-
+  public final static ShooterSubsystem shooterSubystem = new ShooterSubsystem();
   public final static XboxController controller = new XboxController(Constants.PORTS.CONTROLLER);
 
   /**
@@ -53,14 +54,15 @@ public class RobotContainer {
     final JoystickButton aButton = new JoystickButton(controller, XboxController.Button.kA.value);
     final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
     final JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
+    final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
 
-    aButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
-        Constants.LIMELIGHT.TARGETS.LoadingBay));
-    bButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
-        Constants.LIMELIGHT.TARGETS.PowerPort));
+    aButton.whenPressed(new MoveMotorCommand(shooterSubystem.flyWheelMotor, Constants.PORTS.MOTORS.SHOOTER_SPEED));
+    aButton.whenReleased(new MoveMotorCommand(shooterSubystem.flyWheelMotor, 0));
 
     xButton.whenPressed(new ToggleImageProcessingCommand());
+    yButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
+        Constants.LIMELIGHT.TARGETS.PowerPort));
 
     leftTrigger.whenActive(new MoveMotorCommand(armSubsystem.armMotor1, 0.75));
   }

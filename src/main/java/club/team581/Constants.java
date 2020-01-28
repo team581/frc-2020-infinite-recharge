@@ -42,6 +42,9 @@ public final class Constants {
 
     final static public int WINCH_MOTOR1 = 0;
     final static public int WINCH_MOTOR2 = 1;
+
+    final static public int FLYWHEEL_MOTOR = 0;
+    final static public double SHOOTER_SPEED = 0.5;
     }
 
   }
