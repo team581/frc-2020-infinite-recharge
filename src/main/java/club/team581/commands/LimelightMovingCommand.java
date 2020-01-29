@@ -7,7 +7,7 @@
 
 package club.team581.commands;
 
-import club.team581.Constants.LIMELIGHT.MOVEMENT;
+import club.team581.Constants.Limelight.Movement;
 import club.team581.Robot;
 import club.team581.util.limelight.Limelight;
 import club.team581.util.limelight.VisionTarget;
@@ -41,7 +41,7 @@ public class LimelightMovingCommand extends CommandBase {
   @Override
   public void execute() {
     // Start with the steering
-    final double steerCmd = Limelight.NetworkTables.horizontalOffset() * MOVEMENT.STEER_SPEED;
+    final double steerCmd = Limelight.NetworkTables.horizontalOffset() * Movement.STEER_SPEED;
     Robot.LimelightSteerCommand = limitToMaxSpeed(steerCmd, 0.25);
 
     final double distance = Limelight.distanceToTarget(this.limelightAngleOfElevation, visionTarget);
@@ -54,9 +54,9 @@ public class LimelightMovingCommand extends CommandBase {
     }
 
     // Try to drive towards the target
-    double driveCmd = (visionTarget.desiredDistance - distance) * MOVEMENT.DRIVE_SPEED;
+    double driveCmd = (visionTarget.desiredDistance - distance) * Movement.DRIVE_SPEED;
 
-    Robot.LimelightDriveCommand = limitToMaxSpeed(driveCmd, MOVEMENT.MAX_DRIVE_SPEED);
+    Robot.LimelightDriveCommand = limitToMaxSpeed(driveCmd, Movement.MAX_DRIVE_SPEED);
     System.out.println("distance: " + distance + " drive: " + String.valueOf(Robot.LimelightDriveCommand) + " steer:"
         + String.valueOf(Robot.LimelightSteerCommand));
     this.finished = false;

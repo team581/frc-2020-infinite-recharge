@@ -13,6 +13,7 @@ import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ArmSubsystem;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
+import club.team581.subsystems.SnarferSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,13 +28,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   private final LimelightMovingCommand autoCommand = new LimelightMovingCommand(
-      Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.LIMELIGHT.TARGETS.PowerPort);
+      Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.PowerPort);
 
   public final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
+  public final static SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
 
-  public final static XboxController controller = new XboxController(Constants.PORTS.CONTROLLER);
+  public final static XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -52,15 +54,16 @@ public class RobotContainer {
   private void configureButtonBindings() {
     final JoystickButton aButton = new JoystickButton(controller, XboxController.Button.kA.value);
     final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
-    final JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
+    final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
+    final JoystickButton leftBumper = new JoystickButton(controller, XboxController.Button.kBumperLeft.value);
 
-    aButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
-        Constants.LIMELIGHT.TARGETS.LoadingBay));
-    bButton.whenHeld(new LimelightMovingCommand(Constants.LIMELIGHT.MEASUREMENTS.LIMELIGHT_ANGLE_OF_ELEVATION,
-        Constants.LIMELIGHT.TARGETS.PowerPort));
+    aButton.whenHeld(new LimelightMovingCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION,
+        Constants.Limelight.Targets.LoadingBay));
+    bButton.whenHeld(new LimelightMovingCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION,
+        Constants.Limelight.Targets.PowerPort));
 
-    xButton.whenPressed(new ToggleImageProcessingCommand());
+    yButton.whenPressed(new ToggleImageProcessingCommand());
 
     leftTrigger.whenActive(new MoveMotorCommand(armSubsystem.armMotor1, 0.75));
   }

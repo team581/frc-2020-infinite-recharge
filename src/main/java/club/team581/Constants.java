@@ -24,43 +24,55 @@ public final class Constants {
   /**
    * Ports on the RoboRIO and on the computer.
    */
-  public final static class PORTS {
+  public final static class Ports {
     final static public Port COLOR_SENSOR = Port.kOnboard;
 
     final static public int CONTROLLER = 0;
 
-    public final static class MOTORS {
+    public final static class Motors {
       final static public int FRONT_RIGHT = 3;
       final static public int FRONT_LEFT = 1;
       final static public int REAR_RIGHT = 4;
       final static public int REAR_LEFT = 2;
 
-    final static public int ARM_MOTOR1 = 0;
-    final static public int ARM_ENCODER1 = 0;
-    final static public int ARM_MOTOR2 = 0;
-    final static public int ARM_ENCODER2 = 0;
+      final static public int ARM_MOTOR1 = 0;
+      final static public int ARM_ENCODER1 = 0;
+      final static public int ARM_MOTOR2 = 0;
+      final static public int ARM_ENCODER2 = 0;
 
-    final static public int WINCH_MOTOR1 = 0;
-    final static public int WINCH_MOTOR2 = 1;
+      final static public int WINCH_MOTOR1 = 0;
+      final static public int WINCH_MOTOR2 = 1;
+
+      public final static class Snarfer {
+        /** Motor port for moving the snarfer mechanism in front of the robot. */
+        final static public int DEPLOY = 1;
+        /** Motor port for moving the wheels that touch the power cells. */
+        final static public int INTAKE = 0;
+      }
+    }
+
+    public final static class LimitSwitches {
+      final static public int SNARFER_UPPER = 0;
+      final static public int SNARFER_LOWER = 0;
     }
 
   }
 
-  public final static class FIELD {
+  public final static class Field {
     /** This is in feet */
     // Sourced from page 30 of the 2020 FRC manual
     final static public double POWER_PORT_HEIGHT = 8.1875;
   }
 
-  public final static class LIMELIGHT {
+  public final static class Limelight {
     final static public String NETWORK_TABLES_TABLE = "limelight";
 
-    public final static class MEASUREMENTS {
+    public final static class Measurements {
       final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.75;
       final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 0;
     }
 
-    public final static class MOVEMENT {
+    public final static class Movement {
       /** Strength of turning. */
       final static public double STEER_SPEED = 0.05;
       /** Strength of driving forwards and backwards. */
@@ -69,7 +81,7 @@ public final class Constants {
       final static public double MAX_DRIVE_SPEED = 0.35;
     }
 
-    public final static class TARGETS {
+    public final static class Targets {
       final static public VisionTarget LoadingBay = new VisionTarget(15, 11, 0);
       final static public VisionTarget PowerPort = new VisionTarget(60, 81.25, 1);
     }

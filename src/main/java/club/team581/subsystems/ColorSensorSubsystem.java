@@ -11,14 +11,14 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
-import club.team581.Constants.PORTS;
+import club.team581.Constants.Ports;
 import club.team581.Robot;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorSensorSubsystem extends SubsystemBase {
-  public final ColorSensorV3 sensor = new ColorSensorV3(PORTS.COLOR_SENSOR);
+  public final ColorSensorV3 sensor = new ColorSensorV3(Ports.COLOR_SENSOR);
 
   public final ColorMatch colorMatcher = new ColorMatch();
   public final static Color RED = new Color(new Color8Bit(255, 0, 0));

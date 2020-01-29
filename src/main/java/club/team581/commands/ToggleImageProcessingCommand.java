@@ -8,7 +8,7 @@
 package club.team581.commands;
 
 import club.team581.util.limelight.Limelight;
-import club.team581.util.limelight.Limelight.NetworkTables.Constants.CameraMode;
+import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

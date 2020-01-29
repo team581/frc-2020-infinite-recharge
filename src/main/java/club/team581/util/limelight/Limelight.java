@@ -7,8 +7,9 @@
 
 package club.team581.util.limelight;
 
-import club.team581.Constants.LIMELIGHT;
-import club.team581.util.limelight.Limelight.NetworkTables.Constants.CameraMode;
+import club.team581.Constants;
+import club.team581.Constants.Limelight.Measurements;
+import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -22,7 +23,7 @@ public final class Limelight {
       return -1;
     }
 
-    return (visionTarget.height - LIMELIGHT.MEASUREMENTS.LIMELIGHT_HEIGHT_FROM_FLOOR)
+    return (visionTarget.height - Measurements.LIMELIGHT_HEIGHT_FROM_FLOOR)
         / Math.tan((limelightAngleOfElevation + NetworkTables.verticalOffset()) * (Math.PI / 180));
   }
 
@@ -31,7 +32,7 @@ public final class Limelight {
    */
   public final static class NetworkTables {
     private final static NetworkTable ntTable = NetworkTableInstance.getDefault()
-        .getTable(LIMELIGHT.NETWORK_TABLES_TABLE);
+        .getTable(Constants.Limelight.NETWORK_TABLES_TABLE);
 
     // public final static boolean targetsExist =
     // ntTable.getEntry("tv").getDouble(0) == 1;
@@ -112,7 +113,7 @@ public final class Limelight {
       return camMode.setNumber(mode.value);
     }
 
-    public final static class Constants {
+    public final static class LimelightConstants {
       /**
        * Sets limelight’s LED state.
        */

@@ -15,11 +15,11 @@ import club.team581.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSubsystem extends SubsystemBase {
-  public final WPI_VictorSPX armMotor1 = new WPI_VictorSPX(Constants.PORTS.MOTORS.ARM_MOTOR1);
-  public final WPI_VictorSPX armMotor2 = new WPI_VictorSPX(Constants.PORTS.MOTORS.ARM_MOTOR2);
+  public final WPI_VictorSPX armMotor1 = new WPI_VictorSPX(Constants.Ports.Motors.ARM_MOTOR1);
+  public final WPI_VictorSPX armMotor2 = new WPI_VictorSPX(Constants.Ports.Motors.ARM_MOTOR2);
 
-  public final VictorSPX winchMotor1 = new VictorSPX(Constants.PORTS.MOTORS.WINCH_MOTOR1);
-  public final VictorSPX winchMotor2 = new VictorSPX(Constants.PORTS.MOTORS.WINCH_MOTOR2);
+  public final VictorSPX winchMotor1 = new VictorSPX(Constants.Ports.Motors.WINCH_MOTOR1);
+  public final VictorSPX winchMotor2 = new VictorSPX(Constants.Ports.Motors.WINCH_MOTOR2);
 
   public ArmSubsystem() {
     armMotor2.follow(armMotor1);
