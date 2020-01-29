@@ -12,11 +12,11 @@ import club.team581.subsystems.SnarferSubsystem.SnarferConstants;
 import club.team581.subsystems.SnarferSubsystem.SnarferDeploymentPosition;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ToggleSnarferDeployment extends CommandBase {
+public class ToggleSnarferDeploymentCommand extends CommandBase {
   /**
    * Creates a new ToggleSnarferDeployment.
    */
-  public ToggleSnarferDeployment() {
+  public ToggleSnarferDeploymentCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.snarferSubsystem);
   }
