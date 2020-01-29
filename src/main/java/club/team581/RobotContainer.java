@@ -13,6 +13,7 @@ import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ArmSubsystem;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
+import club.team581.subsystems.ShooterSubsystem;
 import club.team581.subsystems.SnarferSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -34,6 +35,7 @@ public class RobotContainer {
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
   public final static SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
+  public final static ShooterSubsystem shooterSubystem = new ShooterSubsystem();
 
   public final static XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
 
@@ -56,7 +58,6 @@ public class RobotContainer {
     final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
     final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
-    final JoystickButton leftBumper = new JoystickButton(controller, XboxController.Button.kBumperLeft.value);
 
     aButton.whenHeld(new LimelightMovingCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION,
         Constants.Limelight.Targets.LoadingBay));
