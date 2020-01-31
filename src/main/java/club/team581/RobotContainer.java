@@ -15,6 +15,7 @@ import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
 import club.team581.subsystems.ShooterSubsystem;
 import club.team581.subsystems.SnarferSubsystem;
+import edu.wpi.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,7 +36,7 @@ public class RobotContainer {
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
   public final static SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
-  public final static ShooterSubsystem shooterSubystem = new ShooterSubsystem();
+  public final static HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
 
   public final static XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
 
