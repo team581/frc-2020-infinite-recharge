@@ -5,13 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package club.team581.commands;
+package club.team581.commands.snarfer;
 
 import club.team581.RobotContainer;
 import club.team581.subsystems.SnarferSubsystem.SnarferConstants;
 import club.team581.subsystems.SnarferSubsystem.SnarferDeploymentPosition;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+/**
+ * Toggle snarfer deployment from up <-> down. {@see SnarferDeploymentPosition}
+ */
 public class ToggleSnarferDeploymentCommand extends CommandBase {
   /**
    * Creates a new ToggleSnarferDeployment.
@@ -37,7 +40,7 @@ public class ToggleSnarferDeploymentCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
     RobotContainer.snarferSubsystem.deployMotor.set(0);
   }
 

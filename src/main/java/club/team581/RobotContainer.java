@@ -8,7 +8,6 @@
 package club.team581;
 
 import club.team581.commands.LimelightMovingCommand;
-import club.team581.commands.MoveMotorCommand;
 import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ArmSubsystem;
 import club.team581.subsystems.ColorSensorSubsystem;
@@ -66,7 +65,7 @@ public class RobotContainer {
 
     yButton.whenPressed(new ToggleImageProcessingCommand());
 
-    leftTrigger.whenActive(new MoveMotorCommand(armSubsystem.armMotor1, 0.75));
+    leftTrigger.whenActive(() -> armSubsystem.armMotor1.set(0.75));
   }
 
   /**

@@ -33,7 +33,7 @@ public class LimelightMovingCommand extends CommandBase {
 
   }
 
-  private double limitToMaxSpeed(double value, double absoluteMaxValue) {
+  private double limitToMaxSpeed(final double value, final double absoluteMaxValue) {
     return Math.max(-absoluteMaxValue, Math.min(value, absoluteMaxValue));
   }
 
@@ -54,7 +54,7 @@ public class LimelightMovingCommand extends CommandBase {
     }
 
     // Try to drive towards the target
-    double driveCmd = (visionTarget.desiredDistance - distance) * Movement.DRIVE_SPEED;
+    final double driveCmd = (visionTarget.desiredDistance - distance) * Movement.DRIVE_SPEED;
 
     Robot.LimelightDriveCommand = limitToMaxSpeed(driveCmd, Movement.MAX_DRIVE_SPEED);
     System.out.println("distance: " + distance + " drive: " + String.valueOf(Robot.LimelightDriveCommand) + " steer:"

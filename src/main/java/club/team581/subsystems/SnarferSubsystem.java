@@ -20,6 +20,7 @@ public class SnarferSubsystem extends SubsystemBase {
   public final DigitalInput upperLimitSwitch = new DigitalInput(Constants.Ports.LimitSwitches.SNARFER_UPPER);
   public final DigitalInput lowerLimitSwitch = new DigitalInput(Constants.Ports.LimitSwitches.SNARFER_LOWER);
   public SnarferDeploymentPosition preferredPosition = SnarferDeploymentPosition.UP;
+  public SnarferIntakeDirection preferredSpeed = SnarferIntakeDirection.STOPPED;
 
   /**
    * Represents the states the snarfer deployment can be.
@@ -34,6 +35,18 @@ public class SnarferSubsystem extends SubsystemBase {
     DOWN,
     /** The snarfer is moving between the up and down down states. */
     MOVING
+  }
+
+  public static enum SnarferIntakeDirection {
+    IN(SnarferConstants.intakeMotorSpeed),
+    STOPPED(0),
+    OUT(-SnarferConstants.intakeMotorSpeed);
+
+    public final double value;
+
+    SnarferIntakeDirection(double speed) {
+      this.value = speed;
+    }
   }
 
   public final SnarferDeploymentPosition getSnarferPosition() {
@@ -51,5 +64,7 @@ public class SnarferSubsystem extends SubsystemBase {
   public static final class SnarferConstants {
     /** How fast the deployment motor should move. Should be from [-1, 1]. */
     public static final double deploymentMotorSpeed = 0.25;
+    /** How fast the intake motor should move. Should be from [-1, 1]. */
+    public static final double intakeMotorSpeed = 0.25;
   }
 }
