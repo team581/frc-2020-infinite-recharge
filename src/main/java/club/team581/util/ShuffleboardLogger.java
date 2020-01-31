@@ -2,13 +2,17 @@ package club.team581.util;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import club.team581.RobotContainer;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
+import edu.wpi.cscore.MjpegServer;
 
 /// Visualization of the Shuffleboard layout         \\\
 /// Please update this when the layout changes       \\\
@@ -16,16 +20,17 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 /// Dimensions can change depending on screen size   \\\
 //  0123456789
 // +----------+
-// |XXCN      |
-// |YYDDDD    |
-// |ZZDDDD    |
-// |  DDDD    |
-// |          |
+// |XDDDDLLLLL|
+// |YDDDDLLLLL|
+// |ZDDDDLLLLL|
+// |C    LLLLL|
+// |N    LLLLL|
 // +----------+
 // Key:
 // C: Recognized color
 // N: Recognized color confidence
 // D: Mecanum drive visualization
+// L: Limelight camera output
 // X: Joystick X output
 // Y: Joystick Y output
 // Z: Joystick Z output
@@ -40,20 +45,22 @@ public final class ShuffleboardLogger {
   /** Shuffleboard tab used for logging. */
   public static final ShuffleboardTab tab = Shuffleboard.getTab(tabTitle);
 
-  private final NetworkTableEntry joyX = tab.add("Joystick X", 0).withPosition(0, 0).withSize(2, 1)
+  private final NetworkTableEntry joyX = tab.add("Joystick X", 0).withPosition(0, 0).withSize(1, 1)
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
-  private final NetworkTableEntry joyY = tab.add("Joystick Y", 0).withPosition(0, 1).withSize(2, 1)
+  private final NetworkTableEntry joyY = tab.add("Joystick Y", 0).withPosition(0, 1).withSize(1, 1)
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
-  private final NetworkTableEntry joyZ = tab.add("Joystick Z", 0).withPosition(0, 2).withSize(2, 1)
+  private final NetworkTableEntry joyZ = tab.add("Joystick Z", 0).withPosition(0, 2).withSize(1, 1)
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
 
-  public final NetworkTableEntry recognizedColor = tab.add("Recognized color", "(nothing yet)").withPosition(2, 0)
+  public final NetworkTableEntry recognizedColor = tab.add("Recognized color", "(nothing yet)").withPosition(0, 3)
       .withSize(1, 1).withWidget(BuiltInWidgets.kTextView).getEntry();
-  public final NetworkTableEntry colorConfidence = tab.add("Color sensor confidence", 0).withPosition(3, 0)
+  public final NetworkTableEntry colorConfidence = tab.add("Color sensor confidence", 0).withPosition(0, 4)
       .withSize(1, 1).withWidget(BuiltInWidgets.kNumberBar).getEntry();
 
   public final ComplexWidget mecanumDrive = tab.add("Mecanum Drive", RobotContainer.driveSubsystem.mecanumDrive)
-      .withPosition(2, 1).withSize(4, 3).withWidget(BuiltInWidgets.kMecanumDrive);
+      .withPosition(1, 0).withSize(4, 3).withWidget(BuiltInWidgets.kMecanumDrive);
+  public final ComplexWidget limelightCamera = tab.add("Limelight Camera", RobotContainer.limelightCamera)
+  .withPosition(5, 0).withSize(6, 5).withWidget(BuiltInWidgets.kCameraStream).withProperties(Map.of("Show crosshair", false, "Show controls", false));
 
   /**
    * Log joystick values using a graph and number bars on Shuffleboard.
