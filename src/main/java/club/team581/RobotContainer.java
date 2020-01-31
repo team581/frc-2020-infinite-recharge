@@ -35,6 +35,7 @@ public class RobotContainer {
   public final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
+  public final static ShooterSubsystem shooterSubystem = new ShooterSubsystem();
   public final static SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
   public final static HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
 
