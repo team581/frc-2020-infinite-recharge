@@ -18,13 +18,42 @@ import edu.wpi.first.networktables.NetworkTableInstance;
  * @see https://docs.limelightvision.io
  */
 public final class Limelight {
-  public final static double distanceToTarget(double limelightAngleOfElevation, VisionTarget visionTarget) {
+  public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
       return -1;
     }
 
     return (visionTarget.height - Measurements.LIMELIGHT_HEIGHT_FROM_FLOOR)
         / Math.tan((limelightAngleOfElevation + NetworkTables.verticalOffset()) * (Math.PI / 180));
+  }
+
+  public final static LimelightMotion getDriveCommand() {
+    final double KpAim = -0.1;
+    final double KpDistance = -0.1;
+    final double min_aim_command = 0.05;
+
+    final double headingError = -NetworkTables.horizontalOffset();
+    final double distanceError = -NetworkTables.verticalOffset();
+    double steeringAdjust = 0;
+
+    if (NetworkTables.horizontalOffset() > 1.0) {
+      steeringAdjust = KpAim * headingError - min_aim_command;
+    } else if (NetworkTables.horizontalOffset() < 1.0) {
+      steeringAdjust = KpAim * headingError - min_aim_command;
+    }
+
+    final double distanceAdjust = KpDistance * distanceError;
+    return new LimelightMotion(distanceAdjust, steeringAdjust);
+  }
+
+  public final static class LimelightMotion {
+    public final double yAxisTranslation;
+    public final double zAxisRotation;
+
+    public LimelightMotion(final double yAxisTranslation, final double zAxisRotation) {
+      this.yAxisTranslation = yAxisTranslation;
+      this.zAxisRotation = zAxisRotation;
+    }
   }
 
   /**
@@ -93,7 +122,7 @@ public final class Limelight {
       return ntTable.getEntry("getpipe").getDouble(0);
     };
 
-    public final static boolean setPipelineIndex(int index) {
+    public final static boolean setPipelineIndex(final int index) {
       return ntTable.getEntry("pipeline").setNumber(index);
     }
 
@@ -107,7 +136,7 @@ public final class Limelight {
       }
     }
 
-    public final static boolean setImageProcessingMode(CameraMode mode) {
+    public final static boolean setImageProcessingMode(final CameraMode mode) {
       final NetworkTableEntry camMode = ntTable.getEntry("camMode");
 
       return camMode.setNumber(mode.value);
@@ -129,7 +158,7 @@ public final class Limelight {
 
         public final int value;
 
-        LEDMode(int value) {
+        LEDMode(final int value) {
           this.value = value;
         }
       }
@@ -144,7 +173,7 @@ public final class Limelight {
 
         public final int value;
 
-        CameraMode(int value) {
+        CameraMode(final int value) {
           this.value = value;
         }
       }
@@ -168,7 +197,7 @@ public final class Limelight {
 
         public final int value;
 
-        Stream(int value) {
+        Stream(final int value) {
           this.value = value;
         }
       }
@@ -184,7 +213,7 @@ public final class Limelight {
 
         public final int value;
 
-        Snapshot(int value) {
+        Snapshot(final int value) {
           this.value = value;
         }
       }

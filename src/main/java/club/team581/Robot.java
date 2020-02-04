@@ -85,12 +85,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    autonomousCommand = robotContainer.getAutonomousCommand();
-
-    // schedule the autonomous command (example)
-    if (autonomousCommand != null) {
-      autonomousCommand.schedule();
-    }
   }
 
   /**
@@ -111,18 +105,16 @@ public class Robot extends TimedRobot {
     }
   }
 
-  public static double LimelightDriveCommand = 0;
-  public static double LimelightSteerCommand = 0;
-
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-    if (LimelightDriveCommand == 0 && LimelightSteerCommand == 0) {
-      drive.driveCartesian(-controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight));
+    if (robotContainer.controller.getAButton()) {
+      // Limelight.getDriveCommand()
+      drive.driveCartesian(0, 0, 0);
     } else {
-      drive.driveCartesian(0, LimelightDriveCommand, LimelightSteerCommand);
+      drive.driveCartesian(-controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight));
     }
   }
 
