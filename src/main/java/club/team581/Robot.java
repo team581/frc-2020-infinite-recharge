@@ -8,6 +8,8 @@
 package club.team581;
 
 import club.team581.util.ShuffleboardLogger;
+import club.team581.util.limelight.Limelight;
+import club.team581.util.limelight.Limelight.LimelightMotion;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -110,11 +112,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if (robotContainer.controller.getAButton()) {
-      // Limelight.getDriveCommand()
-      drive.driveCartesian(0, 0, 0);
+    if (controller.getAButton()) {
+      double angle = Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION;
+      Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay);
+      drive.driveCartesian( 
+      -Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
+      Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).yAxisTranslation, 
+      Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
     } else {
-      drive.driveCartesian(-controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight));
+      drive.driveCartesian(-controller.getX(Hand.kLeft)/3, controller.getY(Hand.kLeft)/3, controller.getX(Hand.kRight)/3);
     }
   }
 

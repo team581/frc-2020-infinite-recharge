@@ -10,6 +10,7 @@ package club.team581.util.limelight;
 import club.team581.Constants;
 import club.team581.Constants.Limelight.Measurements;
 import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
+import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CornerCoords;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -24,33 +25,44 @@ public final class Limelight {
     }
 
     return (visionTarget.height - Measurements.LIMELIGHT_HEIGHT_FROM_FLOOR)
-        / Math.tan(java.lang.Math.toRadians(limelightAngleOfElevation + NetworkTables.verticalOffset()));
+        / Math.tan((limelightAngleOfElevation + NetworkTables.verticalOffset()) * (Math.PI / 180));
   }
 
-  public final static LimelightMotion getDriveCommand() {
-    final double KpAim = -0.1;
-    final double KpDistance = -0.1;
+  public final static LimelightMotion getDriveCommand(final double limelightAngle, final VisionTarget visionTarget) {
+    final double KpAim = -0.05;
+    final double KpStrafe = -0.05;
+    final double KpDistance = -0.08;
     final double min_aim_command = 0.05;
 
     final double headingError = -NetworkTables.horizontalOffset();
-    final double distanceError = -NetworkTables.verticalOffset();
-    double steeringAdjust = 0;
+    final double distanceError = distanceToTarget(limelightAngle, visionTarget) - NetworkTables.verticalOffset();
 
-    if (NetworkTables.horizontalOffset() > 1.0) {
-      steeringAdjust = KpAim * headingError - min_aim_command;
-    } else if (NetworkTables.horizontalOffset() < 1.0) {
-      steeringAdjust = KpAim * headingError - min_aim_command;
+    double strafingAdjust = 0;
+
+    final double acceptableAngle = 0.5;
+
+    
+    if (NetworkTables.horizontalOffset() > acceptableAngle) {
+      strafingAdjust = KpStrafe * headingError - min_aim_command;
+    } else if (NetworkTables.horizontalOffset() < acceptableAngle) {
+      strafingAdjust = KpStrafe * headingError - min_aim_command;
     }
 
     final double distanceAdjust = KpDistance * distanceError;
-    return new LimelightMotion(distanceAdjust, steeringAdjust);
+
+    final double steeringAdjust = KpAim * (NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y) - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y));
+
+    System.out.println("Strafing Adjust Value: " + strafingAdjust + " Distance Adjust Value: " + distanceAdjust + " Steering Adjust Value: " + steeringAdjust);
+    return new LimelightMotion(strafingAdjust, distanceAdjust, steeringAdjust);
   }
 
   public final static class LimelightMotion {
+    public final double xAxisTranslation;
     public final double yAxisTranslation;
     public final double zAxisRotation;
 
-    public LimelightMotion(final double yAxisTranslation, final double zAxisRotation) {
+    public LimelightMotion(final double xAxisTranslation, final double yAxisTranslation, final double zAxisRotation) {
+      this.xAxisTranslation = xAxisTranslation;
       this.yAxisTranslation = yAxisTranslation;
       this.zAxisRotation = zAxisRotation;
     }
@@ -87,6 +99,14 @@ public final class Limelight {
     /** Skew or rotation (-90 degrees to 0 degrees) */
     public final static double skew() {
       return ntTable.getEntry("ts").getDouble(0);
+    };
+
+    public final static double targetCoords(final CornerCoords cornerValue) {
+      final double[] resetValues = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+      final double[] coordValues = ntTable.getEntry("tcornxy").getDoubleArray(resetValues);
+
+      return coordValues[cornerValue.value];
+
     };
 
     /**
@@ -214,6 +234,31 @@ public final class Limelight {
         public final int value;
 
         Snapshot(final int value) {
+          this.value = value;
+        }
+      }
+
+      public static enum CornerCoords {
+        /** Top left corner of the vision target */
+        TOP_LEFT_X(0),
+        /** Top left corner of the vision target */
+        TOP_LEFT_Y(1),
+        /** Top right corner of the vision target */
+        TOP_RIGHT_X(2),
+        /** Top right corner of the vision target */
+        TOP_RIGHT_Y(3),
+        /** Bottom left corner of the vision target */
+        BOTTOM_RIGHT_X(4),
+        /** Bottom left corner of the vision target */
+        BOTTOM_RIGHT_Y(5),
+        /** Bottom right corner of the vision target */
+        BOTTOM_LEFT_X(6),
+        /** Bottom right corner of the vision target */
+        BOTTOM_LEFT_Y(7);
+
+        public final int value;
+
+        CornerCoords(final int value) {
           this.value = value;
         }
       }
