@@ -7,7 +7,8 @@
 
 package club.team581.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import club.team581.Constants;
@@ -17,10 +18,15 @@ public class ArmSubsystem extends SubsystemBase {
   public final WPI_VictorSPX armMotor1 = new WPI_VictorSPX(Constants.Ports.Motors.ARM_MOTOR1);
   public final WPI_VictorSPX armMotor2 = new WPI_VictorSPX(Constants.Ports.Motors.ARM_MOTOR2);
 
-  public final WPI_TalonSRX winchMotor = new WPI_TalonSRX(Constants.Ports.Motors.WINCH_MOTOR1);
+  public final VictorSPX winchMotor1 = new VictorSPX(Constants.Ports.Motors.WINCH_MOTOR1);
+  public final VictorSPX winchMotor2 = new VictorSPX(Constants.Ports.Motors.WINCH_MOTOR2);
 
   public ArmSubsystem() {
     armMotor2.follow(armMotor1);
+    this.armMotor2.setInverted(InvertType.OpposeMaster);
+
+    winchMotor2.follow(winchMotor1);
+    this.winchMotor2.setInverted(InvertType.OpposeMaster);
   }
 
   @Override
