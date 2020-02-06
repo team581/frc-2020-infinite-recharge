@@ -24,7 +24,7 @@ public final class Limelight {
     }
 
     return (visionTarget.height - Measurements.LIMELIGHT_HEIGHT_FROM_FLOOR)
-        / Math.tan((limelightAngleOfElevation + NetworkTables.verticalOffset()) * (Math.PI / 180));
+        / Math.tan(java.lang.Math.toRadians(limelightAngleOfElevation + NetworkTables.verticalOffset()));
   }
 
   public final static LimelightMotion getDriveCommand() {
