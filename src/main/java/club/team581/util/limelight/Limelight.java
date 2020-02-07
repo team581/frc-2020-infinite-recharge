@@ -7,6 +7,8 @@
 
 package club.team581.util.limelight;
 
+import java.util.Arrays;
+
 import club.team581.Constants;
 import club.team581.Constants.Limelight.Measurements;
 import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
@@ -29,9 +31,13 @@ public final class Limelight {
   }
 
   public final static LimelightMotion getDriveCommand(final double limelightAngle, final VisionTarget visionTarget) {
-    final double KpAim = -0.05;
-    final double KpStrafe = -0.05;
-    final double KpDistance = -0.08;
+    if (!NetworkTables.targetsExist()) {
+      return new LimelightMotion(0, 0, 0);
+    }
+
+    final double KpAim = -0.05 / 2;
+    final double KpStrafe = -0.05 / 2;
+    final double KpDistance = -0.08 / 2;
     final double min_aim_command = 0.05;
 
     final double headingError = -NetworkTables.horizontalOffset();
@@ -41,7 +47,6 @@ public final class Limelight {
 
     final double acceptableAngle = 0.5;
 
-    
     if (NetworkTables.horizontalOffset() > acceptableAngle) {
       strafingAdjust = KpStrafe * headingError - min_aim_command;
     } else if (NetworkTables.horizontalOffset() < acceptableAngle) {
@@ -50,9 +55,11 @@ public final class Limelight {
 
     final double distanceAdjust = KpDistance * distanceError;
 
-    final double steeringAdjust = KpAim * (NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y) - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y));
+    final double steeringAdjust = KpAim * (NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y)
+        - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y));
 
-    System.out.println("Strafing Adjust Value: " + strafingAdjust + " Distance Adjust Value: " + distanceAdjust + " Steering Adjust Value: " + steeringAdjust);
+    System.out.println("Strafing Adjust Value: " + strafingAdjust + " Distance Adjust Value: " + distanceAdjust
+        + " Steering Adjust Value: " + steeringAdjust);
     return new LimelightMotion(strafingAdjust, distanceAdjust, steeringAdjust);
   }
 
@@ -102,11 +109,15 @@ public final class Limelight {
     };
 
     public final static double targetCoords(final CornerCoords cornerValue) {
-      final double[] resetValues = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
-      final double[] coordValues = ntTable.getEntry("tcornxy").getDoubleArray(resetValues);
+      final double[] resetValues = { 0, 0, 0, 0, 0, 0, 0, 0 };
+      final double[] rawCoordValues = ntTable.getEntry("tcornxy").getDoubleArray(resetValues);
+      // Pad the array with zeroes if it is missing values
+      // Note from Jonah: I have observed this array sometimes having 6 values in it,
+      // not sure why. If you don't pad the array you can get an out-of-bounds
+      // exception and crash the whole ass program
+      final double[] coordValues = Arrays.copyOf(rawCoordValues, resetValues.length);
 
       return coordValues[cornerValue.value];
-
     };
 
     /**
@@ -247,13 +258,13 @@ public final class Limelight {
         TOP_RIGHT_X(2),
         /** Top right corner of the vision target */
         TOP_RIGHT_Y(3),
-        /** Bottom left corner of the vision target */
+        /** Bottom right corner of the vision target */
         BOTTOM_RIGHT_X(4),
-        /** Bottom left corner of the vision target */
+        /** Bottom right corner of the vision target */
         BOTTOM_RIGHT_Y(5),
-        /** Bottom right corner of the vision target */
+        /** Bottom left corner of the vision target */
         BOTTOM_LEFT_X(6),
-        /** Bottom right corner of the vision target */
+        /** Bottom left corner of the vision target */
         BOTTOM_LEFT_Y(7);
 
         public final int value;

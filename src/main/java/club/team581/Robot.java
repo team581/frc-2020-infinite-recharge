@@ -9,7 +9,6 @@ package club.team581;
 
 import club.team581.util.ShuffleboardLogger;
 import club.team581.util.limelight.Limelight;
-import club.team581.util.limelight.Limelight.LimelightMotion;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
 
-  private RobotContainer robotContainer;
+  public RobotContainer robotContainer;
 
   public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
 
@@ -113,14 +112,16 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (controller.getAButton()) {
-      double angle = Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION;
+      final double angle = Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION;
       Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay);
-      drive.driveCartesian( 
-      -Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
-      Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).yAxisTranslation, 
-      Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
+      drive.driveCartesian(-Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
+          Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).yAxisTranslation,
+          Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
     } else {
-      drive.driveCartesian(-controller.getX(Hand.kLeft)/3, controller.getY(Hand.kLeft)/3, controller.getX(Hand.kRight)/3);
+      final double divisor = 3;
+
+      drive.driveCartesian(-controller.getX(Hand.kLeft) / divisor, controller.getY(Hand.kLeft) / divisor,
+          controller.getX(Hand.kRight) / divisor);
     }
   }
 
