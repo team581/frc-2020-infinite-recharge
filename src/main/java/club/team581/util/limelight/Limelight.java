@@ -16,11 +16,19 @@ import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.Co
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpiutil.math.MathUtil;
 
 /**
  * @see https://docs.limelightvision.io
  */
 public final class Limelight {
+  // new PIDController(Kp, Ki, Kd)
+  // TODO: Move these constants to a dedicated subclass
+  private final static PIDController strafeController = new PIDController(-0.05, 0, 0);
+  private final static PIDController distanceController = new PIDController(0.04, 0, 0);
+  private final static PIDController rotationController = new PIDController(0.05, 0, 0);
+
   public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
       return -1;
@@ -32,35 +40,32 @@ public final class Limelight {
 
   public final static LimelightMotion getDriveCommand(final double limelightAngle, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
+      // Move nowhere if there isn't a target
       return new LimelightMotion(0, 0, 0);
     }
 
-    final double KpAim = -0.05 / 2;
-    final double KpStrafe = -0.05 / 2;
-    final double KpDistance = -0.08 / 2;
-    final double min_aim_command = 0.05;
+    // #region strafing
+    final double horizontalOffset = NetworkTables.horizontalOffset();
+    // TODO: Move the desired alignment here to a dedicated constants subclass
+    final double strafingAdjust = MathUtil.clamp(strafeController.calculate(horizontalOffset, 0), -1, 1);
+    // #endregion
 
-    final double headingError = -NetworkTables.horizontalOffset();
-    final double distanceError = distanceToTarget(limelightAngle, visionTarget) - NetworkTables.verticalOffset();
+    // #region distance
+    final double distanceToTarget = distanceToTarget(limelightAngle, visionTarget);
+    // TODO: Move the desired distance here to a dedicated constants subclass
+    final double distanceAdjust = MathUtil.clamp(distanceController.calculate(distanceToTarget, 10), -1, 1);
+    // #endregion
 
-    double strafingAdjust = 0;
+    // #region rotation
+    final double sideHeightDifference = (NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y)
+    - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y));
+    // TODO: Move the desired rotation here to a dedicated constants subclass
+    final double rotationAdjust = MathUtil.clamp(rotationController.calculate(sideHeightDifference, 0), -1, 1);
+    // #endregion
 
-    final double acceptableAngle = 0.5;
-
-    if (NetworkTables.horizontalOffset() > acceptableAngle) {
-      strafingAdjust = KpStrafe * headingError - min_aim_command;
-    } else if (NetworkTables.horizontalOffset() < acceptableAngle) {
-      strafingAdjust = KpStrafe * headingError - min_aim_command;
-    }
-
-    final double distanceAdjust = KpDistance * distanceError;
-
-    final double steeringAdjust = KpAim * (NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y)
-        - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y));
-
-    System.out.println("Strafing Adjust Value: " + strafingAdjust + " Distance Adjust Value: " + distanceAdjust
-        + " Steering Adjust Value: " + steeringAdjust);
-    return new LimelightMotion(strafingAdjust, distanceAdjust, steeringAdjust);
+    System.out.println("strafe: " + strafingAdjust + " distance: " + distanceAdjust + " rotate: " + rotationAdjust);
+    return new LimelightMotion(strafingAdjust, MathUtil.clamp(distanceAdjust, -1, 1),
+        MathUtil.clamp(rotationAdjust, -1, 1));
   }
 
   public final static class LimelightMotion {
