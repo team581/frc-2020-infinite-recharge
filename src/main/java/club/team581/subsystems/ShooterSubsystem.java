@@ -16,6 +16,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public final static class ShooterConstants {
     public final static double flyWheelSpeed = 0.5;
-    public final static int flyWheelMotorPort = 0;
+    public final static int flyWheelMotorPort = 10;
   }
 }
