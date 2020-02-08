@@ -44,7 +44,7 @@ public class SnarferSubsystem extends SubsystemBase {
 
     public final double value;
 
-    SnarferIntakeDirection(double speed) {
+    SnarferIntakeDirection(final double speed) {
       this.value = speed;
     }
   }
