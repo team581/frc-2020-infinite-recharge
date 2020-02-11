@@ -9,6 +9,7 @@ package club.team581;
 
 import club.team581.util.ShuffleboardLogger;
 import club.team581.util.limelight.Limelight;
+import club.team581.util.limelight.Limelight.LimelightMotion;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -67,11 +68,6 @@ public class Robot extends TimedRobot {
 
     shuffleboard.logJoystickValues(controller.getX(Hand.kLeft), -controller.getY(Hand.kLeft),
         controller.getX(Hand.kRight));
-
-    shuffleboard.logPIDValues(
-      Limelight.getDriveCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
-      Limelight.getDriveCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay).yAxisTranslation,
-      Limelight.getDriveCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
   }
 
   /**
@@ -117,12 +113,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (controller.getAButton()) {
-      final double angle = Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION;
-      Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay);
-      drive.driveCartesian(Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
-          Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).yAxisTranslation,
-          Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
+      final LimelightMotion motion = Limelight.getDriveCommand(
+          Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay);
+
+      shuffleboard.logPIDValues(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
+      drive.driveCartesian(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
     } else {
+      // TODO: Change this once we are out of the testing phase
       final double divisor = 3;
 
       drive.driveCartesian(-controller.getX(Hand.kLeft) / divisor, controller.getY(Hand.kLeft) / divisor,
