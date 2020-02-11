@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import club.team581.RobotContainer;
+import club.team581.util.limelight.Limelight;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -17,16 +18,19 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 /// Dimensions can change depending on screen size   \\\
 //  0123456789
 // +----------+
-// |XDDDDLLLLL|
-// |YDDDDLLLLL|
-// |ZDDDDLLLLL|
-// |C    LLLLL|
-// |N    LLLLL|
+// |XMMMMLLLLL|
+// |YMMMMLLLLL|
+// |ZSDT LLLLL|
+// |CSDT LLLLL|
+// |NSDT LLLLL|
 // +----------+
 // Key:
 // C: Recognized color
 // N: Recognized color confidence
-// D: Mecanum drive visualization
+// M: Mecanum drive visualization
+// S: Strafing PID Loop
+// D: Driving PID Loop
+// T: Strafing PID Loop
 // L: Limelight camera output
 // X: Joystick X output
 // Y: Joystick Y output
@@ -55,9 +59,16 @@ public final class ShuffleboardLogger {
       .withSize(1, 1).withWidget(BuiltInWidgets.kNumberBar).getEntry();
 
   public final ComplexWidget mecanumDrive = tab.add("Mecanum Drive", RobotContainer.driveSubsystem.mecanumDrive)
-      .withPosition(1, 0).withSize(4, 3).withWidget(BuiltInWidgets.kMecanumDrive);
+      .withPosition(1, 0).withSize(4, 2).withWidget(BuiltInWidgets.kMecanumDrive);
   public final ComplexWidget limelightCamera = tab.add("Limelight Camera", RobotContainer.limelightCamera)
   .withPosition(5, 0).withSize(6, 5).withWidget(BuiltInWidgets.kCameraStream).withProperties(Map.of("Show crosshair", false, "Show controls", false));
+  public final ComplexWidget strafePID = tab.add("Strafe PID", Limelight.strafeController).withPosition(1, 2).withSize(1, 1)
+  .withWidget(BuiltInWidgets.kPIDController);
+  public final ComplexWidget distancePID = tab.add("Distance PID", Limelight.distanceController).withPosition(2, 2).withSize(1, 1)
+  .withWidget(BuiltInWidgets.kPIDController);
+  public final ComplexWidget rotationPID = tab.add("Rotation PID", Limelight.rotationController).withPosition(3, 2).withSize(1, 1)
+  .withWidget(BuiltInWidgets.kPIDController);
+
 
   /**
    * Log joystick values using a graph and number bars on Shuffleboard.

@@ -25,9 +25,9 @@ import edu.wpi.first.wpiutil.math.MathUtil;
 public final class Limelight {
   // new PIDController(Kp, Ki, Kd)
   // TODO: Move these constants to a dedicated subclass
-  private final static PIDController strafeController = new PIDController(-0.05, 0, 0);
-  private final static PIDController distanceController = new PIDController(0.04, 0, 0);
-  private final static PIDController rotationController = new PIDController(0.05, 0, 0);
+  public final static PIDController strafeController = new PIDController(0, 0, 0);
+  public final static PIDController distanceController = new PIDController(0, 0, 0);
+  public final static PIDController rotationController = new PIDController(0, 0, 0);
 
   public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
@@ -53,19 +53,21 @@ public final class Limelight {
     // #region distance
     final double distanceToTarget = distanceToTarget(limelightAngle, visionTarget);
     // TODO: Move the desired distance here to a dedicated constants subclass
-    final double distanceAdjust = MathUtil.clamp(distanceController.calculate(distanceToTarget, 10), -1, 1);
+    final double distanceAdjust = MathUtil.clamp(distanceController.calculate(distanceToTarget, 15), -1, 1);
     // #endregion
 
     // #region rotation
-    final double sideHeightDifference = (NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y)
-    - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y));
+    // This gets the mean of the height differences, since just using one set can be inaccurate
+    final double sideHeightDifference = ((NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y)
+        - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y))
+        + (NetworkTables.targetCoords(CornerCoords.TOP_RIGHT_Y) - NetworkTables.targetCoords(CornerCoords.TOP_LEFT_Y)))
+        / 2;
     // TODO: Move the desired rotation here to a dedicated constants subclass
     final double rotationAdjust = MathUtil.clamp(rotationController.calculate(sideHeightDifference, 0), -1, 1);
     // #endregion
 
     System.out.println("strafe: " + strafingAdjust + " distance: " + distanceAdjust + " rotate: " + rotationAdjust);
-    return new LimelightMotion(strafingAdjust, MathUtil.clamp(distanceAdjust, -1, 1),
-        MathUtil.clamp(rotationAdjust, -1, 1));
+    return new LimelightMotion(strafingAdjust, distanceAdjust, rotationAdjust);
   }
 
   public final static class LimelightMotion {
