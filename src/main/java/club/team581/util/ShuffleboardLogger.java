@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 
 /// Visualization of the Shuffleboard layout         \\\
 /// Please update this when the layout changes       \\\
@@ -54,8 +53,8 @@ public final class ShuffleboardLogger {
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
   private final NetworkTableEntry joyZ = tab.add("Joystick Z", 0).withPosition(0, 2).withSize(1, 1)
       .withWidget(BuiltInWidgets.kNumberBar).getEntry();
-  private final NetworkTableEntry pidGraph = tab.add("PID Graph", new double[] {0, 0, 0}).withPosition(4, 2).withSize(2, 2)
-      .withWidget(BuiltInWidgets.kGraph).getEntry();
+  private final NetworkTableEntry pidGraph = tab.add("PID Graph", new double[] { 0, 0, 0 }).withPosition(4, 2)
+      .withSize(2, 2).withWidget(BuiltInWidgets.kGraph).getEntry();
 
   public final NetworkTableEntry recognizedColor = tab.add("Recognized color", "(nothing yet)").withPosition(0, 3)
       .withSize(1, 1).withWidget(BuiltInWidgets.kTextView).getEntry();
@@ -65,14 +64,14 @@ public final class ShuffleboardLogger {
   public final ComplexWidget mecanumDrive = tab.add("Mecanum Drive", RobotContainer.driveSubsystem.mecanumDrive)
       .withPosition(1, 0).withSize(4, 2).withWidget(BuiltInWidgets.kMecanumDrive);
   public final ComplexWidget limelightCamera = tab.add("Limelight Camera", RobotContainer.limelightCamera)
-      .withPosition(6, 0).withSize(5, 5).withWidget(BuiltInWidgets.kCameraStream).withProperties(Map.of("Show crosshair", false, "Show controls", false));
-  public final ComplexWidget strafePID = tab.add("Strafe PID", Limelight.strafeController).withPosition(1, 2).withSize(1, 1)
-      .withWidget(BuiltInWidgets.kPIDController);
-  public final ComplexWidget distancePID = tab.add("Distance PID", Limelight.distanceController).withPosition(2, 2).withSize(1, 1)
-      .withWidget(BuiltInWidgets.kPIDController);
-  public final ComplexWidget rotationPID = tab.add("Rotation PID", Limelight.rotationController).withPosition(3, 2).withSize(1, 1)
-      .withWidget(BuiltInWidgets.kPIDController);
-
+      .withPosition(6, 0).withSize(5, 5).withWidget(BuiltInWidgets.kCameraStream)
+      .withProperties(Map.of("Show crosshair", false, "Show controls", false));
+  public final ComplexWidget strafePID = tab.add("Strafe PID", Limelight.strafeController).withPosition(1, 2)
+      .withSize(1, 1).withWidget(BuiltInWidgets.kPIDController);
+  public final ComplexWidget distancePID = tab.add("Distance PID", Limelight.distanceController).withPosition(2, 2)
+      .withSize(1, 1).withWidget(BuiltInWidgets.kPIDController);
+  public final ComplexWidget rotationPID = tab.add("Rotation PID", Limelight.rotationController).withPosition(3, 2)
+      .withSize(1, 1).withWidget(BuiltInWidgets.kPIDController);
 
   /**
    * Log joystick values using a graph and number bars on Shuffleboard.
@@ -86,8 +85,9 @@ public final class ShuffleboardLogger {
     this.joyY.setDouble(y);
     this.joyZ.setDouble(z);
   }
-  public final void logPIDValues (final double strafe, final double distance, final double rotation) {
-      
-    this.pidGraph.setDoubleArray(new double[] {strafe, distance, rotation});
+
+  public final void logPIDValues(final double strafe, final double distance, final double rotation) {
+
+    this.pidGraph.setDoubleArray(new double[] { strafe, distance, rotation });
   }
 }
