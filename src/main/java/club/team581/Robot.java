@@ -67,6 +67,11 @@ public class Robot extends TimedRobot {
 
     shuffleboard.logJoystickValues(controller.getX(Hand.kLeft), -controller.getY(Hand.kLeft),
         controller.getX(Hand.kRight));
+
+    shuffleboard.logPIDValues(
+      Limelight.getDriveCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
+      Limelight.getDriveCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay).yAxisTranslation,
+      Limelight.getDriveCommand(Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
   }
 
   /**
@@ -114,7 +119,7 @@ public class Robot extends TimedRobot {
     if (controller.getAButton()) {
       final double angle = Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION;
       Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay);
-      drive.driveCartesian(-Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
+      drive.driveCartesian(Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).xAxisTranslation,
           Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).yAxisTranslation,
           Limelight.getDriveCommand(angle, Constants.Limelight.Targets.LoadingBay).zAxisRotation);
     } else {
