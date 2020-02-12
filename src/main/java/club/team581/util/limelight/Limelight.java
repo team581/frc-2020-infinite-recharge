@@ -25,10 +25,9 @@ import edu.wpi.first.wpiutil.math.MathUtil;
 public final class Limelight {
   // new PIDController(Kp, Ki, Kd)
   // TODO: Move these constants to a dedicated subclass
-  public final static PIDController strafeController = new PIDController(0.03, 0, 0.85);
-  // \/ Changing Kd here seems to do *nothing* \/
-  public final static PIDController distanceController = new PIDController(0.03, 0, 999999999);
-  public final static PIDController rotationController = new PIDController(0.175, 0, 10000);
+  public final static PIDController strafeController = new PIDController(0.08, 0, 0.01);
+  public final static PIDController distanceController = new PIDController(0.03, 0, 0.004);
+  public final static PIDController rotationController = new PIDController(0.13, 0, 0.001);
 
   public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
@@ -58,7 +57,8 @@ public final class Limelight {
     // #endregion
 
     // #region rotation
-    // This gets the mean of the height differences, since just using one set can be inaccurate
+    // This gets the mean of the height differences, since just using one set can be
+    // inaccurate
     final double sideHeightDifference = ((NetworkTables.targetCoords(CornerCoords.BOTTOM_RIGHT_Y)
         - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y))
         + (NetworkTables.targetCoords(CornerCoords.TOP_RIGHT_Y) - NetworkTables.targetCoords(CornerCoords.TOP_LEFT_Y)))
@@ -67,7 +67,6 @@ public final class Limelight {
     final double rotationAdjust = MathUtil.clamp(rotationController.calculate(sideHeightDifference, 0), -1, 1);
     // #endregion
 
-    System.out.println("strafe: " + strafingAdjust + " distance: " + distanceAdjust + " rotate: " + rotationAdjust);
     return new LimelightMotion(strafingAdjust, distanceAdjust, rotationAdjust);
   }
 
