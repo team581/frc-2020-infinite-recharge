@@ -68,7 +68,7 @@ public final class Constants {
     final static public String NETWORK_TABLES_TABLE = "limelight";
 
     public final static class Measurements {
-      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.75;
+      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.5;
       final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 0;
     }
 
