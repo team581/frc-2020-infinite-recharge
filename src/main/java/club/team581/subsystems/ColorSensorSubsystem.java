@@ -14,17 +14,16 @@ import com.revrobotics.ColorSensorV3;
 import club.team581.Constants.Ports;
 import club.team581.Robot;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorSensorSubsystem extends SubsystemBase {
   public final ColorSensorV3 sensor = new ColorSensorV3(Ports.COLOR_SENSOR);
 
   public final ColorMatch colorMatcher = new ColorMatch();
-  public final static Color RED = new Color(new Color8Bit(255, 0, 0));
-  public final static Color GREEN = new Color(new Color8Bit(0, 255, 0));
-  public final static Color BLUE = new Color(new Color8Bit(0, 0, 255));
-  public final static Color YELLOW = new Color(new Color8Bit(255, 255, 0));
+  public final static Color RED = new Color(0.505126953125, 0.360107421875, 0.134765625);
+  public final static Color GREEN = new Color(0.20166015625, 0.550537109375, 0.247802734375);
+  public final static Color BLUE = new Color(0.148681640625, 0.451171875, 0.400390625);
+  public final static Color YELLOW = new Color(0.295166015625, 0.525390625, 0.179443359375);
 
   public enum ControlPanelColors {
     blue(0), red(1), green(2), yellow(3);
