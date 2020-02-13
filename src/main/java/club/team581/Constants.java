@@ -35,6 +35,8 @@ public final class Constants {
       final static public int REAR_RIGHT = 4;
       final static public int REAR_LEFT = 2;
 
+      final static public int FALCON = 0;
+
       final static public int ARM_MOTOR1 = 0;
       final static public int ARM_ENCODER1 = 0;
       final static public int ARM_MOTOR2 = 0;

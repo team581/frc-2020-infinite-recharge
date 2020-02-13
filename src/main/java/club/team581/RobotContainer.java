@@ -51,11 +51,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Note: A button is reserved and in use for Limelight autonomous driving
+    final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
     final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
 
     yButton.whenPressed(new ToggleImageProcessingCommand());
 
     leftTrigger.whenActive(() -> armSubsystem.armMotor1.set(0.75));
+    bButton.whenActive(() -> driveSubsystem.orchestra.play());
   }
 }
