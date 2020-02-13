@@ -25,9 +25,9 @@ import edu.wpi.first.wpiutil.math.MathUtil;
 public final class Limelight {
   // new PIDController(Kp, Ki, Kd)
   // TODO: Move these constants to a dedicated subclass
-  public final static PIDController strafeController = new PIDController(0.08, 0, 0.01);
+  public final static PIDController strafeController = new PIDController(0.03, 0, 0.006);
   public final static PIDController distanceController = new PIDController(0.03, 0, 0.004);
-  public final static PIDController rotationController = new PIDController(0.13, 0, 0.001);
+  public final static PIDController rotationController = new PIDController(0.1, 0, 0.0003);
 
   public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
