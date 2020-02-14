@@ -9,7 +9,9 @@ package club.team581.subsystems;
 
 import java.util.ArrayList;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.music.Orchestra;
 
@@ -29,12 +31,18 @@ public class DriveSubsystem extends SubsystemBase {
   public final Orchestra orchestra;
 
   public DriveSubsystem() {
+    final TalonFXConfiguration configs = new TalonFXConfiguration();
+
+    configs.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
+
     /* A list of TalonFX's that are to be used as instruments */
     final ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
 
     /* Initialize the TalonFX's to be used */
     for (int i = 0; i < allMotors.length; ++i) {
       instruments.add(allMotors[i]);
+      // Add settings for Falcons
+      allMotors[i].configAllSettings(configs);
     }
 
     orchestra = new Orchestra(instruments);
