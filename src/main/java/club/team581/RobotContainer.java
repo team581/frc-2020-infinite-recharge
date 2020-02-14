@@ -58,6 +58,12 @@ public class RobotContainer {
     yButton.whenPressed(new ToggleImageProcessingCommand());
 
     leftTrigger.whenActive(() -> armSubsystem.armMotor1.set(0.75));
-    bButton.whenActive(() -> driveSubsystem.orchestra.play());
+    bButton.whenPressed(() -> {
+      if (driveSubsystem.orchestra.isPlaying()) {
+        driveSubsystem.orchestra.stop();
+      } else {
+        driveSubsystem.orchestra.play();
+      }
+    });
   }
 }
