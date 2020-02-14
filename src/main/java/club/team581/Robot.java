@@ -65,9 +65,6 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-
-    shuffleboard.logJoystickValues(controller.getX(Hand.kLeft), -controller.getY(Hand.kLeft),
-        controller.getX(Hand.kRight));
   }
 
   /**
