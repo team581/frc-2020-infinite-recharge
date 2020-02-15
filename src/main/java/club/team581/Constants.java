@@ -46,18 +46,10 @@ public final class Constants {
       final static public int WINCH_MOTOR2 = 1;
 
       public final static class Snarfer {
-        /** Motor port for moving the snarfer mechanism in front of the robot. */
-        final static public int DEPLOY = 21;
         /** Motor port for moving the wheels that touch the power cells. */
         final static public int INTAKE = 20;
       }
     }
-
-    public final static class LimitSwitches {
-      final static public int SNARFER_UPPER = 22;
-      final static public int SNARFER_LOWER = 23;
-    }
-
   }
 
   public final static class Field {
