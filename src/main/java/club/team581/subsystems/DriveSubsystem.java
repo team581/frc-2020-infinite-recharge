@@ -25,7 +25,7 @@ public class DriveSubsystem extends SubsystemBase {
   public final WPI_TalonFX rearRightMotor = new WPI_TalonFX(Motors.REAR_RIGHT);
   public final WPI_TalonFX rearLeftMotor = new WPI_TalonFX(Motors.REAR_LEFT);
   public final TalonFX falconMotor = new TalonFX(Motors.FALCON);
-  private final TalonFX[] allMotors = { falconMotor };
+  public final TalonFX[] allMotors = { falconMotor };
   public final MecanumDrive mecanumDrive = new MecanumDrive(frontLeftMotor, rearLeftMotor, frontRightMotor,
       rearRightMotor);
   public final Orchestra orchestra;
