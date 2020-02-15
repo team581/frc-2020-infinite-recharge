@@ -7,6 +7,8 @@
 
 package club.team581.subsystems;
 
+import java.util.ArrayList;
+
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
@@ -36,8 +38,7 @@ public class ColorSensorSubsystem extends SubsystemBase {
     }
   }
 
-  private static final ControlPanelColor[] colorWheel = { ControlPanelColor.red, ControlPanelColor.yellow,
-      ControlPanelColor.blue, ControlPanelColor.green };
+  public final ArrayList<ControlPanelColor> colorWheel = new ArrayList<ControlPanelColor>();
 
   public ColorSensorSubsystem() {
     // This needs to be changed to the readouts we get in optimal conditions from
@@ -49,7 +50,15 @@ public class ColorSensorSubsystem extends SubsystemBase {
     // Avoid reporting on values that are inaccurate (like if we are nowhere near
     // the control panel)
     // The default value is 0.95
-    this.colorMatcher.setConfidenceThreshold(0.85);
+    this.colorMatcher.setConfidenceThreshold(0.90);
+
+
+    final ControlPanelColor[] colorWheelValues = { ControlPanelColor.red, ControlPanelColor.yellow,
+      ControlPanelColor.blue, ControlPanelColor.green };
+
+    for (int i = 0; i < colorWheelValues.length; i++) {
+      colorWheel.add(colorWheelValues[i]);
+    }
   }
 
   @Override

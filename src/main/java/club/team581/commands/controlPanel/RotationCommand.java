@@ -16,6 +16,9 @@ import club.team581.subsystems.ColorSensorSubsystem.ControlPanelColor;
 import club.team581.subsystems.ControlPanelManipulatorSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+/**
+ * Rotate the control panel a number of times.
+ */
 public class RotationCommand extends CommandBase {
   private final float desiredRotations;
 
@@ -26,7 +29,7 @@ public class RotationCommand extends CommandBase {
   private ArrayList<ControlPanelColor> recognizedColors = new ArrayList<ControlPanelColor>();
 
   /**
-   * Creates a new FullRotationCommand.
+   * Creates a new RotationCommand.
    */
   public RotationCommand(ControlPanelColor initialColor, float desiredRotations) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -40,8 +43,6 @@ public class RotationCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // TODO: Implement an algorithm to find the ideal direction (makes speed
-    // TODO: negative/positive) to rotate
     RobotContainer.controlPanelManipulatorSubsystem.spinner.set(VictorSPXControlMode.PercentOutput,
         ControlPanelManipulatorSubsystem.speed);
   }
