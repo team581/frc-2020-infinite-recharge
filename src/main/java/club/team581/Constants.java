@@ -7,6 +7,7 @@
 
 package club.team581;
 
+import club.team581.commands.auto.SeekVisionTarget.Constants.StartPosition;
 import club.team581.util.DoubleSolenoidChannels;
 import club.team581.util.limelight.VisionTarget;
 import edu.wpi.first.wpilibj.I2C.Port;
@@ -62,8 +63,9 @@ public final class Constants {
     final static public double POWER_PORT_HEIGHT = 8.1875;
   }
 
-  public final static class Limelight {
+  public final static class Autonomous {
     final static public String NETWORK_TABLES_TABLE = "limelight";
+    final static public StartPosition START_POSITION = StartPosition.LEFT;
 
     public final static class Measurements {
       final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.5;
@@ -77,6 +79,8 @@ public final class Constants {
       final static public double DRIVE_SPEED = 0.25;
       /** Speed limit so we don't drive too fast. */
       final static public double MAX_DRIVE_SPEED = 0.35;
+
+      final static public double INCHES_PER_ROTATION = 1;
     }
 
     public final static class Targets {

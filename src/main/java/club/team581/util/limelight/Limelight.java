@@ -10,7 +10,7 @@ package club.team581.util.limelight;
 import java.util.Arrays;
 
 import club.team581.Constants;
-import club.team581.Constants.Limelight.Measurements;
+import club.team581.Constants.Autonomous.Measurements;
 import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
 import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CornerCoords;
 import edu.wpi.first.networktables.NetworkTable;
@@ -28,6 +28,7 @@ public final class Limelight {
   public final static PIDController strafeController = new PIDController(0.03, 0, 0.006);
   public final static PIDController distanceController = new PIDController(0.03, 0, 0.004);
   public final static PIDController rotationController = new PIDController(0.1, 0, 0.0003);
+  public final static double marginOfError = 0.01;
 
   public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
@@ -41,7 +42,7 @@ public final class Limelight {
   public final static LimelightMotion getDriveCommand(final double limelightAngle, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
       // Move nowhere if there isn't a target
-      return new LimelightMotion(0, 0, 0);
+      return new LimelightMotion(0, 0, 0, true);
     }
 
     // #region strafing
@@ -52,8 +53,10 @@ public final class Limelight {
 
     // #region distance
     final double distanceToTarget = distanceToTarget(limelightAngle, visionTarget);
+    final double desiredDistance = 15;
     // TODO: Move the desired distance here to a dedicated constants subclass
-    final double distanceAdjust = MathUtil.clamp(distanceController.calculate(distanceToTarget, 15), -1, 1);
+    final double distanceAdjust = MathUtil.clamp(distanceController.calculate(distanceToTarget, desiredDistance), -1,
+        1);
     // #endregion
 
     // #region rotation
@@ -67,18 +70,32 @@ public final class Limelight {
     final double rotationAdjust = MathUtil.clamp(rotationController.calculate(sideHeightDifference, 0), -1, 1);
     // #endregion
 
-    return new LimelightMotion(strafingAdjust, distanceAdjust, rotationAdjust);
+    /** Checks if the distance value is within a certain margin of error */
+    boolean distanceIsFinished = (desiredDistance - distanceToTarget < -marginOfError)
+        && (distanceToTarget - desiredDistance < marginOfError);
+    /** Checks if the strafing value is within a certain margin of error */
+    boolean strafingIsFinished = (horizontalOffset < marginOfError) && (-marginOfError < horizontalOffset);
+    /** Checks if the rotation value is within a certain margin of error */
+    boolean rotationIsFinished = (sideHeightDifference < marginOfError) && (-marginOfError < sideHeightDifference);
+
+    /** Checks if distance, strafing and rotation are all finished */
+    final boolean isFinished = rotationIsFinished && strafingIsFinished && distanceIsFinished;
+
+    return new LimelightMotion(strafingAdjust, distanceAdjust, rotationAdjust, isFinished);
   }
 
   public final static class LimelightMotion {
     public final double xAxisTranslation;
     public final double yAxisTranslation;
     public final double zAxisRotation;
+    public final boolean isFinished;
 
-    public LimelightMotion(final double xAxisTranslation, final double yAxisTranslation, final double zAxisRotation) {
+    public LimelightMotion(final double xAxisTranslation, final double yAxisTranslation, final double zAxisRotation,
+        final boolean isFinished) {
       this.xAxisTranslation = xAxisTranslation;
       this.yAxisTranslation = yAxisTranslation;
       this.zAxisRotation = zAxisRotation;
+      this.isFinished = isFinished;
     }
   }
 
@@ -87,7 +104,7 @@ public final class Limelight {
    */
   public final static class NetworkTables {
     private final static NetworkTable ntTable = NetworkTableInstance.getDefault()
-        .getTable(Constants.Limelight.NETWORK_TABLES_TABLE);
+        .getTable(Constants.Autonomous.NETWORK_TABLES_TABLE);
 
     // public final static boolean targetsExist =
     // ntTable.getEntry("tv").getDouble(0) == 1;
