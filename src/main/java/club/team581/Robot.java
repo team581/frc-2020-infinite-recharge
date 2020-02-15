@@ -111,7 +111,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     if (controller.getAButton()) {
       final LimelightMotion motion = Limelight.getDriveCommand(
-          Constants.Limelight.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Limelight.Targets.LoadingBay);
+          Constants.Autonomous.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Autonomous.Targets.LoadingBay);
 
       shuffleboard.logPIDValues(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
       drive.driveCartesian(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
