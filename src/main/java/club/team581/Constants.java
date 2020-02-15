@@ -39,6 +39,7 @@ public final class Constants {
 
       final static public int FALCON = 0;
 
+      final static public int CONTROL_PANEL = 36;
 
       final static public int ARM_MOTOR1 = 0;
       final static public int ARM_ENCODER1 = 0;

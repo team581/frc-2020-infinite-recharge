@@ -24,19 +24,20 @@ public class ColorSensorSubsystem extends SubsystemBase {
   public final static Color GREEN = new Color(0.20166015625, 0.550537109375, 0.247802734375);
   public final static Color BLUE = new Color(0.148681640625, 0.451171875, 0.400390625);
   public final static Color YELLOW = new Color(0.295166015625, 0.525390625, 0.179443359375);
+  public ControlPanelColor recognizedColor;
 
-  public enum ControlPanelColors {
+  public enum ControlPanelColor {
     blue(0), red(1), green(2), yellow(3);
 
     public final int value;
 
-    ControlPanelColors(int value) {
+    ControlPanelColor(int value) {
       this.value = value;
     }
   }
 
-  private static final ControlPanelColors[] colorWheel = { ControlPanelColors.red, ControlPanelColors.yellow,
-      ControlPanelColors.blue, ControlPanelColors.green };
+  private static final ControlPanelColor[] colorWheel = { ControlPanelColor.red, ControlPanelColor.yellow,
+      ControlPanelColor.blue, ControlPanelColor.green };
 
   public ColorSensorSubsystem() {
     // This needs to be changed to the readouts we get in optimal conditions from
@@ -60,14 +61,19 @@ public class ColorSensorSubsystem extends SubsystemBase {
 
     // This should be a switch statement but Java is stupid and won't let us
     if (match.color == BLUE) {
+      recognizedColor = ControlPanelColor.blue;
       colorString = "Blue";
     } else if (match.color == RED) {
+      recognizedColor = ControlPanelColor.red;
       colorString = "Red";
     } else if (match.color == GREEN) {
+      recognizedColor = ControlPanelColor.green;
       colorString = "Green";
     } else if (match.color == YELLOW) {
+      recognizedColor = ControlPanelColor.yellow;
       colorString = "Yellow";
     } else {
+      recognizedColor = null;
       colorString = "Unknown";
     }
 
@@ -75,7 +81,7 @@ public class ColorSensorSubsystem extends SubsystemBase {
     Robot.shuffleboard.colorConfidence.setDouble(match.confidence);
   }
 
-  public static int rotationsToDesiredColor(ControlPanelColors current, ControlPanelColors desired) {
+  public static int rotationsToDesiredColor(ControlPanelColor current, ControlPanelColor desired) {
     return current.value - desired.value;
   }
 }
