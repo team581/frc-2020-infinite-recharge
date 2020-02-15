@@ -7,16 +7,12 @@
 
 package club.team581.subsystems;
 
+import club.team581.Constants;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
 public class DumperSubsystem extends SubsystemBase {
-  /**
-   * Creates a new DumperSubsystem.
-   */
-  public DumperSubsystem() {
-
-  }
+  final public DoubleSolenoid dumper = new DoubleSolenoid(Constants.Ports.DUMPER_SOLENOID.forward, Constants.Ports.DUMPER_SOLENOID.reverse);
 
   @Override
   public void periodic() {

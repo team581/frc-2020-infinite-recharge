@@ -14,6 +14,7 @@ import club.team581.subsystems.DriveSubsystem;
 import club.team581.subsystems.DumperSubsystem;
 import club.team581.subsystems.SnarferSubsystem;
 import edu.wpi.cscore.HttpCamera;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -54,6 +55,7 @@ public class RobotContainer {
     final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
     final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
+    final JoystickButton rightTrigger = new JoystickButton(controller, XboxController.Axis.kRightTrigger.value);
 
     yButton.whenPressed(new ToggleImageProcessingCommand());
 
@@ -65,5 +67,8 @@ public class RobotContainer {
         driveSubsystem.orchestra.play();
       }
     });
+
+    rightTrigger.whenActive(() -> dumperSubystem.dumper.set(DoubleSolenoid.Value.kForward));
+    rightTrigger.whenInactive(() -> dumperSubystem.dumper.set(DoubleSolenoid.Value.kReverse));
   }
 }

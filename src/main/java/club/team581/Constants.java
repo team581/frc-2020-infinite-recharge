@@ -7,6 +7,7 @@
 
 package club.team581;
 
+import club.team581.util.DoubleSolenoidChannels;
 import club.team581.util.limelight.VisionTarget;
 import edu.wpi.first.wpilibj.I2C.Port;
 
@@ -26,6 +27,7 @@ public final class Constants {
    */
   public final static class Ports {
     final static public Port COLOR_SENSOR = Port.kOnboard;
+    final static public DoubleSolenoidChannels DUMPER_SOLENOID = new DoubleSolenoidChannels(55, 56);
 
     final static public int CONTROLLER = 0;
 
@@ -36,6 +38,7 @@ public final class Constants {
       final static public int REAR_LEFT = 2;
 
       final static public int FALCON = 0;
+
 
       final static public int ARM_MOTOR1 = 0;
       final static public int ARM_ENCODER1 = 0;
