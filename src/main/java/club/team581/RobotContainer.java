@@ -7,8 +7,11 @@
 
 package club.team581;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ArmSubsystem;
+import club.team581.subsystems.ArmSubsystem.ArmSubsystemConstants;
 import club.team581.subsystems.ColorSensorSubsystem;
 import club.team581.subsystems.ControlPanelManipulatorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
@@ -56,12 +59,27 @@ public class RobotContainer {
     // Note: A button is reserved and in use for Limelight autonomous driving
     final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
     final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
+    final JoystickButton leftBumper = new JoystickButton(controller, XboxController.Button.kBumperLeft.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
     final JoystickButton rightTrigger = new JoystickButton(controller, XboxController.Axis.kRightTrigger.value);
 
     yButton.whenPressed(new ToggleImageProcessingCommand());
 
-    leftTrigger.whenActive(() -> armSubsystem.armMotor1.set(0.75));
+    leftTrigger.whenActive(() -> {
+      if (armSubsystem.armDeployed) {
+        armSubsystem.winchMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.winchSpeed);
+      }
+    });
+
+    leftBumper.whenActive(() -> {
+      armSubsystem.armDeployed = true;
+      armSubsystem.armMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.armSpeed);
+    });
+    leftBumper.whenActive(() -> {
+      armSubsystem.armDeployed = false;
+      armSubsystem.armMotor1.set(ControlMode.PercentOutput, -ArmSubsystemConstants.armSpeed);
+    });
+
     bButton.whenPressed(() -> {
       if (driveSubsystem.orchestra.isPlaying()) {
         driveSubsystem.orchestra.stop();
