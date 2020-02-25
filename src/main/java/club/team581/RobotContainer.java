@@ -34,7 +34,7 @@ public class RobotContainer {
   public final static ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
-  public final static DumperSubsystem dumperSubystem = new DumperSubsystem();
+  public final static DumperSubsystem dumperSubsystem = new DumperSubsystem();
   public final static SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
   public final static ControlPanelManipulatorSubsystem controlPanelManipulatorSubsystem = new ControlPanelManipulatorSubsystem();
   public final static HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
@@ -88,7 +88,7 @@ public class RobotContainer {
       }
     });
 
-    rightTrigger.whenActive(() -> dumperSubystem.dumper.set(DoubleSolenoid.Value.kForward));
-    rightTrigger.whenInactive(() -> dumperSubystem.dumper.set(DoubleSolenoid.Value.kReverse));
+    rightTrigger.whenActive(() -> dumperSubsystem.dumper.set(DoubleSolenoid.Value.kForward));
+    rightTrigger.whenInactive(() -> dumperSubsystem.dumper.set(DoubleSolenoid.Value.kReverse));
   }
 }
