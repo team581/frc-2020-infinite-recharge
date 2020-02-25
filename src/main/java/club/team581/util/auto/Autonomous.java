@@ -10,7 +10,6 @@ package club.team581.util.auto;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import club.team581.Constants;
-import club.team581.Robot;
 import club.team581.RobotContainer;
 import edu.wpi.first.wpilibj.controller.PIDController;
 
