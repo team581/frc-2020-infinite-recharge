@@ -16,6 +16,9 @@ import club.team581.subsystems.ColorSensorSubsystem.ControlPanelColor;
 import club.team581.subsystems.ControlPanelManipulatorSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+/**
+ * Rotate the control panel to a specified color.
+ */
 public class RotateToColor extends CommandBase {
   private final ControlPanelColor desiredColor;
   private final ArrayList<ControlPanelColor> colorWheel = RobotContainer.colorSensorSubsystem.colorWheel;
