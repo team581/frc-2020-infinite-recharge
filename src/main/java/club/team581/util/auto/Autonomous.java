@@ -35,16 +35,19 @@ public class Autonomous {
         }
         currentEncoderValue = currentEncoderValue / allMotors.length;
 
+        /** Finds the distance traveled after starting the command */
         encoderDistance = (currentEncoderValue - initalEncoderValue)
                 / Constants.Autonomous.Movement.INCHES_PER_ROTATION;
 
+        /** Calculates the output of the PID controller */
         drivingAdjust = driveController.calculate(encoderDistance, distanceToDrive) / divisor;
 
         return drivingAdjust;
     }
 
     public static final boolean isFinished() {
-        return distanceToDrive - marginOfError < encoderDistance && distanceToDrive + marginOfError > encoderDistance;
+        /** Checks if the distance to the desired encoder value is within a margin of error */
+        return distanceToDrive - marginOfError < encoderDistance && encoderDistance < distanceToDrive + marginOfError;
 
     }
 }

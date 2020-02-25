@@ -33,12 +33,10 @@ public final class Constants {
     final static public int CONTROLLER = 0;
 
     public final static class Motors {
-      final static public int FRONT_RIGHT = 3;
-      final static public int FRONT_LEFT = 1;
-      final static public int REAR_RIGHT = 4;
-      final static public int REAR_LEFT = 2;
-
-      final static public int FALCON = 0;
+      final static public int FRONT_RIGHT =  11;
+      final static public int FRONT_LEFT = 10;
+      final static public int REAR_RIGHT = 13;
+      final static public int REAR_LEFT = 12;
 
       final static public int CONTROL_PANEL = 36;
 

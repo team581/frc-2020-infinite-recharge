@@ -16,14 +16,18 @@ import club.team581.util.auto.Autonomous;
 
 public class DriveWithEncoders extends CommandBase {
   TalonFX[] motors;
-  double initalEncoderValue;
+  double initialEncoderValue = 0;
+  int distanceToDrive;
 
   /**
-   * Drives forwards a certain amount using encoders.
+   * Drives forwards a certain distance using encoders.
+   * @param distanceToDrive distance to drive (in inches)
    */
-  public DriveWithEncoders() {
+  public DriveWithEncoders(int distanceToDrive) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveSubsystem);
+
+    this.distanceToDrive = distanceToDrive;
   }
 
   // Called when the command is initially scheduled.
@@ -31,16 +35,17 @@ public class DriveWithEncoders extends CommandBase {
   public void initialize() {
     motors = RobotContainer.driveSubsystem.allMotors;
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(0, 0, 0);
+    /** Gets all of the encoder values of the  */
     for (int i = 0; i < motors.length; i++) {
-      initalEncoderValue = motors[i].getSelectedSensorPosition();
+      initialEncoderValue = initialEncoderValue + motors[i].getSelectedSensorPosition();
     }
-    initalEncoderValue = initalEncoderValue / motors.length;
+    initialEncoderValue = initialEncoderValue / motors.length;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(Autonomous.getDriveCommand(24, initalEncoderValue), 0, 0);
+    RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(Autonomous.getDriveCommand(distanceToDrive, initialEncoderValue), 0, 0);
   }
 
   // Called once the command ends or is interrupted.
