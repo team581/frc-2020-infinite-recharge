@@ -7,8 +7,6 @@
 
 package club.team581.commands.controlPanel;
 
-import java.util.ArrayList;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import club.team581.RobotContainer;
@@ -21,7 +19,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class RotateToColor extends CommandBase {
   private final ControlPanelColor desiredColor;
-  private final ArrayList<ControlPanelColor> colorWheel = RobotContainer.colorSensorSubsystem.colorWheel;
 
   /**
    * Creates a new RotateToColor.
