@@ -9,7 +9,6 @@ package club.team581;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import club.team581.commands.ToggleImageProcessingCommand;
 import club.team581.subsystems.ArmSubsystem;
 import club.team581.subsystems.ArmSubsystem.ArmSubsystemConstants;
 import club.team581.subsystems.ColorSensorSubsystem;
@@ -18,9 +17,13 @@ import club.team581.subsystems.DriveSubsystem;
 import club.team581.subsystems.DumperSubsystem;
 import club.team581.subsystems.SnarferSubsystem;
 import club.team581.subsystems.SnarferSubsystem.SnarferIntakeDirection;
+import club.team581.util.limelight.Limelight;
+import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
 import edu.wpi.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -64,7 +67,14 @@ public class RobotContainer {
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
     final JoystickButton rightTrigger = new JoystickButton(controller, XboxController.Axis.kRightTrigger.value);
 
-    yButton.whenPressed(new ToggleImageProcessingCommand());
+    yButton.whenPressed(new ConditionalCommand(new InstantCommand(() -> {
+      Limelight.NetworkTables.setPipelineIndex(9);
+      Limelight.NetworkTables.setImageProcessingMode(CameraMode.RAW);
+    }), new InstantCommand(() -> {
+      // TODO: This pipeline index should not be hardcoded
+      Limelight.NetworkTables.setPipelineIndex(0);
+      Limelight.NetworkTables.setImageProcessingMode(CameraMode.VISION_PROCESSOR);
+    }), () -> Limelight.NetworkTables.imageProcessingMode() == CameraMode.VISION_PROCESSOR));
 
     leftTrigger.whenActive(() -> {
       if (armSubsystem.armDeployed) {
