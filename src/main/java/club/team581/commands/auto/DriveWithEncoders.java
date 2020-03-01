@@ -35,7 +35,7 @@ public class DriveWithEncoders extends CommandBase {
   public void initialize() {
     motors = RobotContainer.driveSubsystem.allMotors;
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(0, 0, 0);
-    /** Gets all of the encoder values of the  */
+    // Gets all of the encoder values of the Falcons
     for (int i = 0; i < motors.length; i++) {
       initialEncoderValue = initialEncoderValue + motors[i].getSelectedSensorPosition();
     }
