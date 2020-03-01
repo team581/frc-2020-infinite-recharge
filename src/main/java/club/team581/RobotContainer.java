@@ -17,8 +17,8 @@ import club.team581.subsystems.ControlPanelManipulatorSubsystem;
 import club.team581.subsystems.DriveSubsystem;
 import club.team581.subsystems.DumperSubsystem;
 import club.team581.subsystems.SnarferSubsystem;
+import club.team581.subsystems.SnarferSubsystem.SnarferIntakeDirection;
 import edu.wpi.cscore.HttpCamera;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -60,6 +60,7 @@ public class RobotContainer {
     final JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
     final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftBumper = new JoystickButton(controller, XboxController.Button.kBumperLeft.value);
+    final JoystickButton rightBumper = new JoystickButton(controller, XboxController.Button.kBumperRight.value);
     final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
     final JoystickButton rightTrigger = new JoystickButton(controller, XboxController.Axis.kRightTrigger.value);
 
@@ -75,7 +76,7 @@ public class RobotContainer {
       armSubsystem.armDeployed = true;
       armSubsystem.armMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.armSpeed);
     });
-    leftBumper.whenActive(() -> {
+    rightBumper.whenActive(() -> {
       armSubsystem.armDeployed = false;
       armSubsystem.armMotor1.set(ControlMode.PercentOutput, -ArmSubsystemConstants.armSpeed);
     });
@@ -88,7 +89,7 @@ public class RobotContainer {
       }
     });
 
-    rightTrigger.whenActive(() -> dumperSubsystem.dumper.set(DoubleSolenoid.Value.kForward));
-    rightTrigger.whenInactive(() -> dumperSubsystem.dumper.set(DoubleSolenoid.Value.kReverse));
+    rightTrigger.whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.IN.value));
+    rightTrigger.whenInactive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.STOPPED.value));
   }
 }
