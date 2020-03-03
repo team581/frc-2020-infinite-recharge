@@ -7,6 +7,7 @@
 
 package club.team581;
 
+import club.team581.util.ControllerUtil;
 import club.team581.util.ShuffleboardLogger;
 import club.team581.util.limelight.Limelight;
 import club.team581.util.limelight.Limelight.LimelightMotion;
@@ -116,11 +117,9 @@ public class Robot extends TimedRobot {
       shuffleboard.logPIDValues(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
       drive.driveCartesian(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
     } else {
-      // TODO: Change this once we are out of the testing phase
-      final double divisor = 3;
-
-      drive.driveCartesian(-controller.getX(Hand.kLeft) / divisor, controller.getY(Hand.kLeft) / divisor,
-          controller.getX(Hand.kRight) / divisor);
+      drive.driveCartesian(ControllerUtil.joystickScale(controller.getX(Hand.kLeft)),
+          -ControllerUtil.joystickScale(controller.getY(Hand.kLeft)),
+          ControllerUtil.joystickScale(controller.getX(Hand.kRight)));
     }
   }
 
