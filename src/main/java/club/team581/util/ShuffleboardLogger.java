@@ -65,7 +65,6 @@ public final class ShuffleboardLogger {
       .withSize(1, 2).withWidget(BuiltInWidgets.kPIDController);
 
   public final void logPIDValues(final double strafe, final double distance, final double rotation) {
-
     this.pidGraph.setDoubleArray(new double[] { strafe, distance, rotation });
   }
 }
