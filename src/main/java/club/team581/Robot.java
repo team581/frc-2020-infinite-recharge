@@ -32,8 +32,8 @@ public class Robot extends TimedRobot {
 
   public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
 
-  private final XboxController controller = RobotContainer.controller;
-  private final MecanumDrive drive = RobotContainer.driveSubsystem.mecanumDrive;
+  private final static XboxController controller = RobotContainer.controller;
+  private final static MecanumDrive drive = RobotContainer.driveSubsystem.mecanumDrive;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -117,8 +117,8 @@ public class Robot extends TimedRobot {
       shuffleboard.logPIDValues(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
       drive.driveCartesian(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
     } else {
-      drive.driveCartesian(ControllerUtil.joystickScale(controller.getX(Hand.kLeft)),
-          -ControllerUtil.joystickScale(controller.getY(Hand.kLeft)),
+      drive.driveCartesian(-ControllerUtil.joystickScale(controller.getX(Hand.kLeft)),
+          ControllerUtil.joystickScale(controller.getY(Hand.kLeft)),
           ControllerUtil.joystickScale(controller.getX(Hand.kRight)));
     }
   }
