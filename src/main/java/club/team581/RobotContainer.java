@@ -22,9 +22,11 @@ import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.Ca
 import edu.wpi.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -43,6 +45,7 @@ public class RobotContainer {
   public static final HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
 
   public static final XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
+  private static final float TRIGGER_DEADZONE = 0.15f;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -64,8 +67,8 @@ public class RobotContainer {
     final JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     final JoystickButton leftBumper = new JoystickButton(controller, XboxController.Button.kBumperLeft.value);
     final JoystickButton rightBumper = new JoystickButton(controller, XboxController.Button.kBumperRight.value);
-    final JoystickButton leftTrigger = new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value);
-    final JoystickButton rightTrigger = new JoystickButton(controller, XboxController.Axis.kRightTrigger.value);
+    final Trigger leftTrigger = new Trigger(() -> controller.getTriggerAxis(Hand.kLeft) >= TRIGGER_DEADZONE);
+    final Trigger rightTrigger = new Trigger(() -> controller.getTriggerAxis(Hand.kRight) >= TRIGGER_DEADZONE);
 
     yButton.whenPressed(new ConditionalCommand(new InstantCommand(() -> {
       Limelight.NetworkTables.setPipelineIndex(9);
@@ -99,7 +102,9 @@ public class RobotContainer {
       }
     });
 
-    rightTrigger.whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.IN.value));
-    rightTrigger.whenInactive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.STOPPED.value));
+    rightTrigger.whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.IN.value))
+        .whenInactive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.STOPPED.value));
+    rightTrigger.and(leftBumper).whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.OUT.value))
+        .whenInactive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.STOPPED.value));
   }
 }
