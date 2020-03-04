@@ -25,12 +25,12 @@ import edu.wpi.first.wpiutil.math.MathUtil;
 public final class Limelight {
   // new PIDController(Kp, Ki, Kd)
   // TODO: Move these constants to a dedicated subclass
-  public final static PIDController strafeController = new PIDController(0.03, 0, 0.006);
-  public final static PIDController distanceController = new PIDController(0.03, 0, 0.004);
-  public final static PIDController rotationController = new PIDController(0.1, 0, 0.0003);
-  public final static double marginOfError = 0.01;
+  public static final PIDController strafeController = new PIDController(0.03, 0, 0.006);
+  public static final PIDController distanceController = new PIDController(0.03, 0, 0.004);
+  public static final PIDController rotationController = new PIDController(0.1, 0, 0.0003);
+  public static final double MARGIN_OF_ERROR = 0.01;
 
-  public final static double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
+  public static final double distanceToTarget(final double limelightAngleOfElevation, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
       return -1;
     }
@@ -39,7 +39,7 @@ public final class Limelight {
         / Math.tan((limelightAngleOfElevation + NetworkTables.verticalOffset()) * (Math.PI / 180));
   }
 
-  public final static LimelightMotion getDriveCommand(final double limelightAngle, final VisionTarget visionTarget) {
+  public static final LimelightMotion getDriveCommand(final double limelightAngle, final VisionTarget visionTarget) {
     if (!NetworkTables.targetsExist()) {
       // Move nowhere if there isn't a target
       return new LimelightMotion(0, 0, 0, true);
@@ -71,12 +71,12 @@ public final class Limelight {
     // #endregion
 
     /** Checks if the distance value is within a certain margin of error */
-    boolean distanceIsFinished = (desiredDistance - distanceToTarget < -marginOfError)
-        && (distanceToTarget - desiredDistance < marginOfError);
+    boolean distanceIsFinished = (desiredDistance - distanceToTarget < -MARGIN_OF_ERROR)
+        && (distanceToTarget - desiredDistance < MARGIN_OF_ERROR);
     /** Checks if the strafing value is within a certain margin of error */
-    boolean strafingIsFinished = (horizontalOffset < marginOfError) && (-marginOfError < horizontalOffset);
+    boolean strafingIsFinished = (horizontalOffset < MARGIN_OF_ERROR) && (-MARGIN_OF_ERROR < horizontalOffset);
     /** Checks if the rotation value is within a certain margin of error */
-    boolean rotationIsFinished = (sideHeightDifference < marginOfError) && (-marginOfError < sideHeightDifference);
+    boolean rotationIsFinished = (sideHeightDifference < MARGIN_OF_ERROR) && (-MARGIN_OF_ERROR < sideHeightDifference);
 
     /** Checks if distance, strafing and rotation are all finished */
     final boolean isFinished = rotationIsFinished && strafingIsFinished && distanceIsFinished;
@@ -84,7 +84,7 @@ public final class Limelight {
     return new LimelightMotion(strafingAdjust, distanceAdjust, rotationAdjust, isFinished);
   }
 
-  public final static class LimelightMotion {
+  public static final class LimelightMotion {
     public final double xAxisTranslation;
     public final double yAxisTranslation;
     public final double zAxisRotation;
@@ -102,37 +102,35 @@ public final class Limelight {
   /**
    * @see https://docs.limelightvision.io/en/latest/networktables_api.html
    */
-  public final static class NetworkTables {
-    private final static NetworkTable ntTable = NetworkTableInstance.getDefault()
+  public static final class NetworkTables {
+    private static final NetworkTable ntTable = NetworkTableInstance.getDefault()
         .getTable(Constants.Autonomous.NETWORK_TABLES_TABLE);
 
-    // public final static boolean targetsExist =
-    // ntTable.getEntry("tv").getDouble(0) == 1;
-    public final static boolean targetsExist() {
+    public static final boolean targetsExist() {
       return ntTable.getEntry("tv").getDouble(0) == 1;
-    };
+    }
 
     /** `-29.8` to `29.8` degrees. */
-    public final static double horizontalOffset() {
+    public static final double horizontalOffset() {
       return ntTable.getEntry("tx").getDouble(0);
-    };
+    }
 
     /** `-24.85` to `24.85` degrees. */
-    public final static double verticalOffset() {
+    public static final double verticalOffset() {
       return ntTable.getEntry("ty").getDouble(0);
-    };
+    }
 
     /** 0% of image to 100% of image. */
-    public final static double targetArea() {
+    public static final double targetArea() {
       return ntTable.getEntry("ta").getDouble(0);
-    };
+    }
 
     /** Skew or rotation (-90 degrees to 0 degrees) */
-    public final static double skew() {
+    public static final double skew() {
       return ntTable.getEntry("ts").getDouble(0);
-    };
+    }
 
-    public final static double targetCoords(final CornerCoords cornerValue) {
+    public static final double targetCoords(final CornerCoords cornerValue) {
       final double[] resetValues = { 0, 0, 0, 0, 0, 0, 0, 0 };
       final double[] rawCoordValues = ntTable.getEntry("tcornxy").getDoubleArray(resetValues);
       // Pad the array with zeroes if it is missing values
@@ -142,46 +140,46 @@ public final class Limelight {
       final double[] coordValues = Arrays.copyOf(rawCoordValues, resetValues.length);
 
       return coordValues[cornerValue.value];
-    };
+    }
 
     /**
      * The pipeline’s latency contribution (ms) Add at least 11ms for image capture
      * latency.
      */
-    public final static double latency() {
+    public static final double latency() {
       return ntTable.getEntry("tl").getDouble(-1);
-    };
+    }
 
     /** Sidelength of shortest side of the fitted bounding box (pixels) */
-    public final static double shortestSideLength() {
+    public static final double shortestSideLength() {
       return ntTable.getEntry("tshort").getDouble(-1);
-    };
+    }
 
     /** Sidelength of longest side of the fitted bounding box (pixels) */
-    public final static double longestSideLength() {
+    public static final double longestSideLength() {
       return ntTable.getEntry("tlong").getDouble(-1);
-    };
+    }
 
     /** Horizontal sidelength of the rough bounding box (0 - 320 pixels) */
-    public final static double horizontalSideLength() {
+    public static final double horizontalSideLength() {
       return ntTable.getEntry("thor").getDouble(-1);
-    };
+    }
 
     /** Vertical sidelength of the rough bounding box (0 - 320 pixels) */
-    public final static double verticalSideLength() {
+    public static final double verticalSideLength() {
       return ntTable.getEntry("tvert").getDouble(-1);
-    };
+    }
 
     /** True active pipeline index of the camera (0 .. 9) */
-    public final static double currentPipelineIndex() {
+    public static final double currentPipelineIndex() {
       return ntTable.getEntry("getpipe").getDouble(0);
-    };
+    }
 
-    public final static boolean setPipelineIndex(final int index) {
+    public static final boolean setPipelineIndex(final int index) {
       return ntTable.getEntry("pipeline").setNumber(index);
     }
 
-    public final static CameraMode imageProcessingMode() {
+    public static final CameraMode imageProcessingMode() {
       final int currentCameraModeEnum = ntTable.getEntry("camMode").getNumber(0).intValue();
 
       if (currentCameraModeEnum == CameraMode.RAW.value) {
@@ -191,17 +189,17 @@ public final class Limelight {
       }
     }
 
-    public final static boolean setImageProcessingMode(final CameraMode mode) {
+    public static final boolean setImageProcessingMode(final CameraMode mode) {
       final NetworkTableEntry camMode = ntTable.getEntry("camMode");
 
       return camMode.setNumber(mode.value);
     }
 
-    public final static class LimelightConstants {
+    public static final class LimelightConstants {
       /**
        * Sets limelight’s LED state.
        */
-      public static enum LEDMode {
+      public enum LEDMode {
         /** Use the LED Mode set in the current pipeline */
         USE_CURRENT_PIPELINE(0),
         /** Force off */
@@ -221,7 +219,7 @@ public final class Limelight {
       /**
        * Sets limelight’s operation mode.
        */
-      public static enum CameraMode {
+      public enum CameraMode {
         VISION_PROCESSOR(0),
         /** Driver Camera (Increases exposure, disables vision processing) */
         RAW(1);
@@ -236,7 +234,7 @@ public final class Limelight {
       /**
        * Sets limelight’s streaming mode.
        */
-      public static enum Stream {
+      public enum Stream {
         /** Standard - Side-by-side streams if a webcam is attached to Limelight */
         STANDARD(0),
         /**
@@ -260,7 +258,7 @@ public final class Limelight {
       /**
        * Allows users to take snapshots during a match.
        */
-      public static enum Snapshot {
+      public enum Snapshot {
         /** Stop taking snapshots. */
         STOP(0),
         /** Take two snapshots per second. */
@@ -273,7 +271,7 @@ public final class Limelight {
         }
       }
 
-      public static enum CornerCoords {
+      public enum CornerCoords {
         /** Top left corner of the vision target */
         TOP_LEFT_X(0),
         /** Top left corner of the vision target */

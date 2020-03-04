@@ -7,13 +7,12 @@
 
 package club.team581.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SnarferSubsystem extends SubsystemBase {
-  public final WPI_VictorSPX intakeMotor = new WPI_VictorSPX(SnarferConstants.snarferMotorPort);
+  public final WPI_VictorSPX intakeMotor = new WPI_VictorSPX(SnarferConstants.SNARFER_MOTOR_PORT);
   public SnarferIntakeDirection preferredDirection = SnarferIntakeDirection.STOPPED;
   private SnarferIntakeDirection previousDirection;
 
@@ -21,8 +20,8 @@ public class SnarferSubsystem extends SubsystemBase {
     this.intakeMotor.setInverted(false);
   }
 
-  public static enum SnarferIntakeDirection {
-    IN(SnarferConstants.intakeMotorSpeed), STOPPED(0), OUT(-SnarferConstants.intakeMotorSpeed);
+  public enum SnarferIntakeDirection {
+    IN(SnarferConstants.INTAKE_MOTOR_SPEED), STOPPED(0), OUT(-SnarferConstants.INTAKE_MOTOR_SPEED);
 
     public final double value;
 
@@ -33,10 +32,10 @@ public class SnarferSubsystem extends SubsystemBase {
 
   public static final class SnarferConstants {
     /** How fast the intake motor should move. Should be from [-1, 1]. */
-    public static final double intakeMotorSpeed = 0.4;
+    public static final double INTAKE_MOTOR_SPEED = 0.4;
 
     /** Motor port for moving the wheels that touch the power cells. */
-    public static final int snarferMotorPort = 20;
+    public static final int SNARFER_MOTOR_PORT = 20;
   }
 
   @Override

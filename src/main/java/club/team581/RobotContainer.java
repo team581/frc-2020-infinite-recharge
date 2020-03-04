@@ -34,15 +34,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  public final static ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
-  public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
-  public final static ArmSubsystem armSubsystem = new ArmSubsystem();
-  public final static DumperSubsystem dumperSubsystem = new DumperSubsystem();
-  public final static SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
-  public final static ControlPanelManipulatorSubsystem controlPanelManipulatorSubsystem = new ControlPanelManipulatorSubsystem();
-  public final static HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
+  public static final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
+  public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static final ArmSubsystem armSubsystem = new ArmSubsystem();
+  public static final DumperSubsystem dumperSubsystem = new DumperSubsystem();
+  public static final SnarferSubsystem snarferSubsystem = new SnarferSubsystem();
+  public static final ControlPanelManipulatorSubsystem controlPanelManipulatorSubsystem = new ControlPanelManipulatorSubsystem();
+  public static final HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
 
-  public final static XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
+  public static final XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
