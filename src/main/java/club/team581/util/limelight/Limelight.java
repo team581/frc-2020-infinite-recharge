@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 import club.team581.Constants;
 import club.team581.Constants.Autonomous.Measurements;
+import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants;
 import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CameraMode;
 import club.team581.util.limelight.Limelight.NetworkTables.LimelightConstants.CornerCoords;
 import edu.wpi.first.networktables.NetworkTable;
@@ -47,16 +48,14 @@ public final class Limelight {
 
     // #region strafing
     final double horizontalOffset = NetworkTables.horizontalOffset();
-    // TODO: Move the desired alignment here to a dedicated constants subclass
-    final double strafingAdjust = MathUtil.clamp(strafeController.calculate(horizontalOffset, 0), -1, 1);
+    final double strafingAdjust = MathUtil
+        .clamp(strafeController.calculate(horizontalOffset, LimelightConstants.Setpoints.STRAFING), -1, 1);
     // #endregion
 
     // #region distance
     final double distanceToTarget = distanceToTarget(limelightAngle, visionTarget);
-    final double desiredDistance = 15;
-    // TODO: Move the desired distance here to a dedicated constants subclass
-    final double distanceAdjust = MathUtil.clamp(distanceController.calculate(distanceToTarget, desiredDistance), -1,
-        1);
+    final double distanceAdjust = MathUtil
+        .clamp(distanceController.calculate(distanceToTarget, LimelightConstants.Setpoints.DISTANCE), -1, 1);
     // #endregion
 
     // #region rotation
@@ -66,13 +65,13 @@ public final class Limelight {
         - NetworkTables.targetCoords(CornerCoords.BOTTOM_LEFT_Y))
         + (NetworkTables.targetCoords(CornerCoords.TOP_RIGHT_Y) - NetworkTables.targetCoords(CornerCoords.TOP_LEFT_Y)))
         / 2;
-    // TODO: Move the desired rotation here to a dedicated constants subclass
-    final double rotationAdjust = MathUtil.clamp(rotationController.calculate(sideHeightDifference, 0), -1, 1);
+    final double rotationAdjust = MathUtil
+        .clamp(rotationController.calculate(sideHeightDifference, LimelightConstants.Setpoints.ROTATION), -1, 1);
     // #endregion
 
     /** Checks if the distance value is within a certain margin of error */
-    boolean distanceIsFinished = (desiredDistance - distanceToTarget < -MARGIN_OF_ERROR)
-        && (distanceToTarget - desiredDistance < MARGIN_OF_ERROR);
+    boolean distanceIsFinished = (LimelightConstants.Setpoints.DISTANCE - distanceToTarget < -MARGIN_OF_ERROR)
+        && (distanceToTarget - LimelightConstants.Setpoints.DISTANCE < MARGIN_OF_ERROR);
     /** Checks if the strafing value is within a certain margin of error */
     boolean strafingIsFinished = (horizontalOffset < MARGIN_OF_ERROR) && (-MARGIN_OF_ERROR < horizontalOffset);
     /** Checks if the rotation value is within a certain margin of error */
@@ -103,6 +102,10 @@ public final class Limelight {
    * @see https://docs.limelightvision.io/en/latest/networktables_api.html
    */
   public static final class NetworkTables {
+    private NetworkTables() {
+      throw new IllegalStateException("Utility class");
+    }
+
     private static final NetworkTable ntTable = NetworkTableInstance.getDefault()
         .getTable(Constants.Autonomous.NETWORK_TABLES_TABLE);
 
@@ -196,6 +199,17 @@ public final class Limelight {
     }
 
     public static final class LimelightConstants {
+      /** Setpoints used in PID loops. */
+      public static final class Setpoints {
+        private Setpoints() {
+          throw new IllegalStateException("Utility class");
+        }
+
+        static final double STRAFING = 0;
+        static final double ROTATION = 0;
+        static final double DISTANCE = 15;
+      }
+
       /**
        * Sets limelight’s LED state.
        */
