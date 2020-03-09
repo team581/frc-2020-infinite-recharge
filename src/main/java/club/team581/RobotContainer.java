@@ -45,7 +45,7 @@ public class RobotContainer {
   public static final HttpCamera limelightCamera = new HttpCamera("limelight", "http://10.5.81.11:5800");
 
   public static final XboxController controller = new XboxController(Constants.Ports.CONTROLLER);
-  private static final float TRIGGER_DEADZONE = 0.15f;
+  public static final float TRIGGER_DEADZONE = 0.15f;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -104,7 +104,7 @@ public class RobotContainer {
 
     rightTrigger.whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.IN.value))
         .whenInactive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.STOPPED.value));
-    rightTrigger.and(leftBumper).whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.OUT.value))
+    rightTrigger.and(leftBumper).whenActive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.OUT.value * 2))
         .whenInactive(() -> snarferSubsystem.intakeMotor.set(SnarferIntakeDirection.STOPPED.value));
   }
 }

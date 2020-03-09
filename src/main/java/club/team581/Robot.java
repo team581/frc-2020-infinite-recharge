@@ -110,6 +110,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    // We check if the trigger is past the threshold and that the left bumper is not
+    // being pressed (the bumper is used to put the snarfer in reverse)
+    /** The snarfer should be enabled. */
+    final boolean currentlySnarfing = controller.getTriggerAxis(Hand.kRight) > RobotContainer.TRIGGER_DEADZONE
+        && !controller.getBumper(Hand.kLeft);
+
     if (controller.getAButton()) {
       final LimelightMotion motion = Limelight.getDriveCommand(
           Constants.Autonomous.Measurements.LIMELIGHT_ANGLE_OF_ELEVATION, Constants.Autonomous.Targets.LoadingBay);
@@ -117,8 +123,9 @@ public class Robot extends TimedRobot {
       shuffleboard.logPIDValues(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
       drive.driveCartesian(motion.xAxisTranslation, motion.yAxisTranslation, motion.zAxisRotation);
     } else {
+      // If we are in snarfer mode override the regular controls
       drive.driveCartesian(-ControllerUtil.joystickScale(controller.getX(Hand.kLeft)),
-          ControllerUtil.joystickScale(controller.getY(Hand.kLeft)),
+          currentlySnarfing ? -0.2 : ControllerUtil.joystickScale(controller.getY(Hand.kLeft)),
           ControllerUtil.joystickScale(controller.getX(Hand.kRight)));
     }
   }
