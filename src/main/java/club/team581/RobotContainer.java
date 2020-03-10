@@ -81,17 +81,17 @@ public class RobotContainer {
 
     leftTrigger.whenActive(() -> {
       if (armSubsystem.armDeployed) {
-        armSubsystem.winchMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.winchSpeed);
+        armSubsystem.winchMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.WINCH_SPEED);
       }
     });
 
     leftBumper.whenActive(() -> {
       armSubsystem.armDeployed = true;
-      armSubsystem.armMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.armSpeed);
+      armSubsystem.armMotor1.set(ControlMode.PercentOutput, ArmSubsystemConstants.ARM_SPEED);
     });
     rightBumper.whenActive(() -> {
       armSubsystem.armDeployed = false;
-      armSubsystem.armMotor1.set(ControlMode.PercentOutput, -ArmSubsystemConstants.armSpeed);
+      armSubsystem.armMotor1.set(ControlMode.PercentOutput, -ArmSubsystemConstants.ARM_SPEED);
     });
 
     bButton.whenPressed(() -> {

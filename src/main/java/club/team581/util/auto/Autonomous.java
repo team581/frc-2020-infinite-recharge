@@ -25,7 +25,7 @@ public class Autonomous {
   static double drivingAdjust = 0;
   static double marginOfError = 0;
   static double divisor = 0;
-  public final static PIDController driveController = new PIDController(0, 0, 0);
+  public static final PIDController driveController = new PIDController(0, 0, 0);
 
   public static final double getDriveCommand(final double initalEncoderValue, final double distanceToDrive) {
     /** Gets the current average encoder value of the motors */

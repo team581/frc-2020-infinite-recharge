@@ -20,8 +20,8 @@ public class ControlPanelManipulatorSubsystem extends SubsystemBase {
    * scanner see the goal color.
    */
   public ControlPanelColor desiredColor;
-  public final static double speed = 0.5;
-  final public VictorSPX spinner = new VictorSPX(Motors.CONTROL_PANEL);
+  public static final double SPEED = 0.5;
+  public final VictorSPX spinner = new VictorSPX(Motors.CONTROL_PANEL);
 
   /**
    * Creates a new ControlPanelManipulatorSubsystem.
@@ -38,19 +38,19 @@ public class ControlPanelManipulatorSubsystem extends SubsystemBase {
       switch (gameData.charAt(0)) {
         case 'B':
           // Blue case code
-          desiredColor = ControlPanelColor.red;
+          desiredColor = ControlPanelColor.RED;
           break;
         case 'G':
           // Green case code
-          desiredColor = ControlPanelColor.yellow;
+          desiredColor = ControlPanelColor.YELLOW;
           break;
         case 'R':
           // Red case code
-          desiredColor = ControlPanelColor.blue;
+          desiredColor = ControlPanelColor.BLUE;
           break;
         case 'Y':
           // Yellow case code
-          desiredColor = ControlPanelColor.green;
+          desiredColor = ControlPanelColor.GREEN;
           break;
         default:
           // This is corrupt data

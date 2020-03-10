@@ -30,10 +30,10 @@ public class Robot extends TimedRobot {
 
   public RobotContainer robotContainer;
 
-  public final static ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
+  public static final ShuffleboardLogger shuffleboard = new ShuffleboardLogger();
 
-  private final static XboxController controller = RobotContainer.controller;
-  private final static MecanumDrive drive = RobotContainer.driveSubsystem.mecanumDrive;
+  private static final XboxController controller = RobotContainer.controller;
+  private static final MecanumDrive drive = RobotContainer.driveSubsystem.mecanumDrive;
 
   /**
    * This function is run when the robot is first started up and should be used

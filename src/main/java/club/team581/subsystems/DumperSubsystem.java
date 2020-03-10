@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DumperSubsystem extends SubsystemBase {
-  final public DoubleSolenoid dumper = new DoubleSolenoid(Constants.Ports.DUMPER_SOLENOID.forward, Constants.Ports.DUMPER_SOLENOID.reverse);
+  // final public DoubleSolenoid dumper = new DoubleSolenoid(Constants.Ports.DUMPER_SOLENOID.forward, Constants.Ports.DUMPER_SOLENOID.reverse);
 
   @Override
   public void periodic() {

@@ -26,59 +26,59 @@ public final class Constants {
   /**
    * Ports on the RoboRIO and on the computer.
    */
-  public final static class Ports {
-    final static public Port COLOR_SENSOR = Port.kOnboard;
-    final static public DoubleSolenoidChannels DUMPER_SOLENOID = new DoubleSolenoidChannels(55, 56);
+  public static final class Ports {
+    static final public Port COLOR_SENSOR = Port.kOnboard;
+    static final public DoubleSolenoidChannels DUMPER_SOLENOID = new DoubleSolenoidChannels(55, 56);
 
-    final static public int CONTROLLER = 0;
+    static final public int CONTROLLER = 0;
 
-    public final static class Motors {
-      final static public int FRONT_RIGHT =  11;
-      final static public int FRONT_LEFT = 10;
-      final static public int REAR_RIGHT = 13;
-      final static public int REAR_LEFT = 12;
+    public static final class Motors {
+      static final public int FRONT_RIGHT =  11;
+      static final public int FRONT_LEFT = 10;
+      static final public int REAR_RIGHT = 13;
+      static final public int REAR_LEFT = 12;
 
-      final static public int CONTROL_PANEL = 36;
+      static final public int CONTROL_PANEL = 36;
 
-      final static public int ARM_MOTOR1 = 0;
-      final static public int ARM_ENCODER1 = 0;
-      final static public int ARM_MOTOR2 = 0;
-      final static public int ARM_ENCODER2 = 0;
+      static final public int ARM_MOTOR1 = 0;
+      static final public int ARM_ENCODER1 = 0;
+      static final public int ARM_MOTOR2 = 0;
+      static final public int ARM_ENCODER2 = 0;
 
-      final static public int WINCH_MOTOR1 = 0;
-      final static public int WINCH_MOTOR2 = 1;
+      static final public int WINCH_MOTOR1 = 0;
+      static final public int WINCH_MOTOR2 = 1;
     }
   }
 
-  public final static class Field {
+  public static final class Field {
     /** This is in feet */
     // Sourced from page 30 of the 2020 FRC manual
-    final static public double POWER_PORT_HEIGHT = 8.1875;
+    static final public double POWER_PORT_HEIGHT = 8.1875;
   }
 
-  public final static class Autonomous {
-    final static public String NETWORK_TABLES_TABLE = "limelight";
-    final static public StartPosition START_POSITION = StartPosition.LEFT;
+  public static final class Autonomous {
+    static final public String NETWORK_TABLES_TABLE = "limelight";
+    static final public StartPosition START_POSITION = StartPosition.LEFT;
 
-    public final static class Measurements {
-      final static public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.5;
-      final static public double LIMELIGHT_ANGLE_OF_ELEVATION = 0;
+    public static final class Measurements {
+      static final public double LIMELIGHT_HEIGHT_FROM_FLOOR = 5.5;
+      static final public double LIMELIGHT_ANGLE_OF_ELEVATION = 0;
     }
 
-    public final static class Movement {
+    public static final class Movement {
       /** Strength of turning. */
-      final static public double STEER_SPEED = 0.05;
+      static final public double STEER_SPEED = 0.05;
       /** Strength of driving forwards and backwards. */
-      final static public double DRIVE_SPEED = 0.25;
+      static final public double DRIVE_SPEED = 0.25;
       /** Speed limit so we don't drive too fast. */
-      final static public double MAX_DRIVE_SPEED = 0.35;
+      static final public double MAX_DRIVE_SPEED = 0.35;
 
-      final static public double INCHES_PER_ROTATION = 1;
+      static final public double INCHES_PER_ROTATION = 1;
     }
 
-    public final static class Targets {
-      final static public VisionTarget LoadingBay = new VisionTarget(15, 11, 0);
-      final static public VisionTarget PowerPort = new VisionTarget(60, 81.25, 1);
+    public static final class Targets {
+      static final public VisionTarget LoadingBay = new VisionTarget(15, 11, 0);
+      static final public VisionTarget PowerPort = new VisionTarget(60, 81.25, 1);
     }
   }
 }

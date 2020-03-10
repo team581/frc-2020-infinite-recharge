@@ -40,7 +40,7 @@ public class RotateToColor extends CommandBase {
     int multiplier = rotationAmount == -1 ? -1 : 1;
 
     RobotContainer.controlPanelManipulatorSubsystem.spinner.set(ControlMode.PercentOutput,
-        ControlPanelManipulatorSubsystem.speed * multiplier);
+        ControlPanelManipulatorSubsystem.SPEED * multiplier);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

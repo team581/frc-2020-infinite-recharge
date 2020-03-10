@@ -32,7 +32,7 @@ public class SeekVisionTarget extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.driveSubsystem.mecanumDrive.driveCartesian(0, 0,
-        this.startPosition == StartPosition.LEFT ? Constants.rotationSpeed : -Constants.rotationSpeed);
+        this.startPosition == StartPosition.LEFT ? Constants.ROTATION_SPEED : -Constants.ROTATION_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,10 +53,10 @@ public class SeekVisionTarget extends CommandBase {
   }
 
   public static final class Constants {
-    public final static double rotationSpeed = 0.5;
+    public static final double ROTATION_SPEED = 0.5;
 
     /** The positions your robot could start in when in autonomous mode. */
-    public static enum StartPosition {
+    public enum StartPosition {
       LEFT, MIDDLE, RIGHT
     }
   }

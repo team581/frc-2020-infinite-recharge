@@ -35,9 +35,9 @@ public class ArmSubsystem extends SubsystemBase {
     winchMotor2.setNeutralMode(NeutralMode.Coast);
   }
 
-  public final static class ArmSubsystemConstants {
-    public final static double winchSpeed = 0.75;
-    public final static double armSpeed = 0.75;
+  public static final class ArmSubsystemConstants {
+    public static final double WINCH_SPEED = 0.75;
+    public static final double ARM_SPEED = 0.75;
   }
 
   @Override

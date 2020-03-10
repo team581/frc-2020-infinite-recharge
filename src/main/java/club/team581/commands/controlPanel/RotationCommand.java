@@ -44,7 +44,7 @@ public class RotationCommand extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.controlPanelManipulatorSubsystem.spinner.set(VictorSPXControlMode.PercentOutput,
-        ControlPanelManipulatorSubsystem.speed);
+        ControlPanelManipulatorSubsystem.SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
