@@ -31,3 +31,13 @@ jobs:
         with:
           name: Generated JarFile
           path: ./build/libs/frc-2020-infinite-recharge.jar
+  style:
+    name: Check style
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v2
+      - name: Check formatting
+        run: yarn run style
