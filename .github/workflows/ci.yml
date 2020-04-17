@@ -39,5 +39,9 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x.x'
       - name: Check formatting
         run: yarn run style
