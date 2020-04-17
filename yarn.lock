@@ -17,8 +17,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frc-2020-infinite-recharge@workspace:."
   dependencies:
-    prettier: ^2.0.4
-    prettier-plugin-java: ^0.7.1
+    prettier: 2.0.4
+    prettier-plugin-java: 0.7.1
   languageName: unknown
   linkType: soft
 
@@ -39,7 +39,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-java@npm:^0.7.1":
+"prettier-plugin-java@npm:0.7.1":
   version: 0.7.1
   resolution: "prettier-plugin-java@npm:0.7.1"
   dependencies:
@@ -59,7 +59,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.0.4":
+"prettier@npm:2.0.4":
   version: 2.0.4
   resolution: "prettier@npm:2.0.4"
   bin:
