@@ -233,6 +233,9 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/node,java,linux,macos,gradle,windows,visualstudiocode
 
 # Yarn configuration with zero-installs enabled
-.yarn/unplugged
-.yarn/build-state.yml
-!.yarn/cache/*.zip
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
