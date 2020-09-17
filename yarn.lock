@@ -18,7 +18,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frc-2020-infinite-recharge@workspace:."
   dependencies:
-    prettier: 2.0.5
+    prettier: 2.1.2
     prettier-plugin-java: 0.8.2
   languageName: unknown
   linkType: soft
@@ -51,21 +51,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.0.5":
-  version: 2.0.5
-  resolution: "prettier@npm:2.0.5"
-  bin:
-    prettier: bin-prettier.js
-  checksum: d249d89361870a29b20e8b268cb09e908490b8c9e21f70393d12a213701f29ba7e95b7f9ce0ad63929c16ce475176742481911737ae3da4a498873e4a3b90990
-  languageName: node
-  linkType: hard
-
 "prettier@npm:2.1.1":
   version: 2.1.1
   resolution: "prettier@npm:2.1.1"
   bin:
     prettier: bin-prettier.js
   checksum: 420a807cda2d482388daa42379a7aaa1be629cb71f5792362a971a5ed1c6ff377d2e311818d24e9390a4a8a6eac3fda9ebe6975f2168efec893790c0497d8a93
+  languageName: node
+  linkType: hard
+
+"prettier@npm:2.1.2":
+  version: 2.1.2
+  resolution: "prettier@npm:2.1.2"
+  bin:
+    prettier: bin-prettier.js
+  checksum: bedc24c568efbcfe45f255558900777e2fabb36bf28ed4c22d2456eb22dfb012d12e566a46472ea5b857a4e9f263e888f7e316527d00bb58188f1820b0b0031a
   languageName: node
   linkType: hard
 
