@@ -1,16 +1,20 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
     "**/.DS_Store": true,
-    "bin/": true,
     "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.git": true,
+    "**/.hg": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "**/.svn": true,
+    "**/CVS": true,
+    "bin/": true
   },
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "search.exclude": {
+    "**/.pnp.*": true,
+    "**/.yarn": true
+  }
 }
