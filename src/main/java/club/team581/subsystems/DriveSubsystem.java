@@ -8,6 +8,7 @@
 package club.team581.subsystems;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -35,7 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
     configs.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
 
     /* A list of TalonFX's that are to be used as instruments */
-    final ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
+    final List<TalonFX> instruments = new ArrayList<>();
 
     /* Initialize the TalonFX's to be used */
     for (int i = 0; i < allMotors.length; ++i) {
