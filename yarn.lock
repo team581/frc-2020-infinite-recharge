@@ -3,13 +3,14 @@
 
 __metadata:
   version: 4
+  cacheKey: 6
 
 "chevrotain@npm:6.5.0":
   version: 6.5.0
   resolution: "chevrotain@npm:6.5.0"
   dependencies:
     regexp-to-ast: 0.4.0
-  checksum: 2/f8473ac9c12f645548bc92829d4f27e9ce1eb0071d514f8a6da88f5c9fe6f4eab8d9a1e43072ac85f78012573a2165a700be2d4e2c084b30fba6a4cdb6e90dbc
+  checksum: f8473ac9c12f645548bc92829d4f27e9ce1eb0071d514f8a6da88f5c9fe6f4eab8d9a1e43072ac85f78012573a2165a700be2d4e2c084b30fba6a4cdb6e90dbc
   languageName: node
   linkType: hard
 
@@ -18,44 +19,35 @@ __metadata:
   resolution: "frc-2020-infinite-recharge@workspace:."
   dependencies:
     prettier: 2.0.5
-    prettier-plugin-java: 0.8.0
+    prettier-plugin-java: 0.8.2
   languageName: unknown
   linkType: soft
 
-"java-parser@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "java-parser@npm:0.8.0"
+"java-parser@npm:0.8.2":
+  version: 0.8.2
+  resolution: "java-parser@npm:0.8.2"
   dependencies:
     chevrotain: 6.5.0
-    lodash: 4.17.15
-  checksum: 2/699eb92d3ef9e7f92870702271d7928ef218a1035b3cf9f2b3478d34e52ceb180c8ff90a3fa8c044d0d02a2624d34991ad6c8890af3a132cf3352eaba6303f9f
+    lodash: 4.17.20
+  checksum: 8cb2a0413067a3e67a786477d55bf28013618c30b33d952e63932ee799795bf2ac75462220046a1f1b0810a96c75cc242cc5b8030baf4c2a284671f15394fa1e
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.15":
-  version: 4.17.15
-  resolution: "lodash@npm:4.17.15"
-  checksum: 2/aec3fbb7570aa67bda500b8299b1b1821d60646bede87f76a74dfcc7666ab3445267d734ec71424d70809d52ad67a1356fab5ab694a3faa1908d68e9d48f00f5
+"lodash@npm:4.17.20":
+  version: 4.17.20
+  resolution: "lodash@npm:4.17.20"
+  checksum: c62101d2500c383b5f174a7e9e6fe8098149ddd6e9ccfa85f36d4789446195f5c4afd3cfba433026bcaf3da271256566b04a2bf2618e5a39f6e67f8c12030cb6
   languageName: node
   linkType: hard
 
-"prettier-plugin-java@npm:0.8.0":
-  version: 0.8.0
-  resolution: "prettier-plugin-java@npm:0.8.0"
+"prettier-plugin-java@npm:0.8.2":
+  version: 0.8.2
+  resolution: "prettier-plugin-java@npm:0.8.2"
   dependencies:
-    java-parser: ^0.8.0
-    lodash: 4.17.15
-    prettier: 2.0.4
-  checksum: 2/a6a7d90d68c9e3a51cccbb28e6f09069b0be0fc09d707834de66a9f886377503fe774280b4ee5d3c4e1ce5a5198cf31b0adad7e9046dc085df32a8aafd8e7ded
-  languageName: node
-  linkType: hard
-
-"prettier@npm:2.0.4":
-  version: 2.0.4
-  resolution: "prettier@npm:2.0.4"
-  bin:
-    prettier: bin-prettier.js
-  checksum: 2/a43343ac00250ce239439a723e5b0860a46e4703542b925c962d8c3dfceab1f69a326ba4c8de2f24ad39c4daef07831439b0b237cda9c63e4981164075e7dc5a
+    java-parser: 0.8.2
+    lodash: 4.17.20
+    prettier: 2.1.1
+  checksum: 6ada3485e63ab6a04000821fbab03e92badd071a72c52a191d7755599d480b53879f2fae84e41bd10584ece592dfc38a9724c6991ba82174af515b459e078fa6
   languageName: node
   linkType: hard
 
@@ -64,13 +56,22 @@ __metadata:
   resolution: "prettier@npm:2.0.5"
   bin:
     prettier: bin-prettier.js
-  checksum: 2/d249d89361870a29b20e8b268cb09e908490b8c9e21f70393d12a213701f29ba7e95b7f9ce0ad63929c16ce475176742481911737ae3da4a498873e4a3b90990
+  checksum: d249d89361870a29b20e8b268cb09e908490b8c9e21f70393d12a213701f29ba7e95b7f9ce0ad63929c16ce475176742481911737ae3da4a498873e4a3b90990
+  languageName: node
+  linkType: hard
+
+"prettier@npm:2.1.1":
+  version: 2.1.1
+  resolution: "prettier@npm:2.1.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 420a807cda2d482388daa42379a7aaa1be629cb71f5792362a971a5ed1c6ff377d2e311818d24e9390a4a8a6eac3fda9ebe6975f2168efec893790c0497d8a93
   languageName: node
   linkType: hard
 
 "regexp-to-ast@npm:0.4.0":
   version: 0.4.0
   resolution: "regexp-to-ast@npm:0.4.0"
-  checksum: 2/93047971451f70fb24836cc5175fa738f484a2b077b409eb29141bc2d20ff6c25f8724c21432e91f1d3b112372c354ade709b5ce2bc29c1d2e52e879f198b49c
+  checksum: 93047971451f70fb24836cc5175fa738f484a2b077b409eb29141bc2d20ff6c25f8724c21432e91f1d3b112372c354ade709b5ce2bc29c1d2e52e879f198b49c
   languageName: node
   linkType: hard
