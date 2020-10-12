@@ -19,7 +19,7 @@ __metadata:
   resolution: "frc-2020-infinite-recharge@workspace:."
   dependencies:
     prettier: 2.1.2
-    prettier-plugin-java: 0.8.2
+    prettier-plugin-java: 0.8.3
   languageName: unknown
   linkType: soft
 
@@ -40,14 +40,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-java@npm:0.8.2":
-  version: 0.8.2
-  resolution: "prettier-plugin-java@npm:0.8.2"
+"prettier-plugin-java@npm:0.8.3":
+  version: 0.8.3
+  resolution: "prettier-plugin-java@npm:0.8.3"
   dependencies:
     java-parser: 0.8.2
     lodash: 4.17.20
     prettier: 2.1.1
-  checksum: 6ada3485e63ab6a04000821fbab03e92badd071a72c52a191d7755599d480b53879f2fae84e41bd10584ece592dfc38a9724c6991ba82174af515b459e078fa6
+  checksum: 8eb4085e5a87970c862429caa25449177759de22c31a583d25e6c8e16a07a367aadcdd91fe4f8fb9932f5d527e994f3cce719ee5fa1aca7e952e5a2bba325edb
   languageName: node
   linkType: hard
 

@@ -2,7 +2,7 @@
   "name": "frc-2020-infinite-recharge",
   "devDependencies": {
     "prettier": "2.1.2",
-    "prettier-plugin-java": "0.8.2"
+    "prettier-plugin-java": "0.8.3"
   },
   "scripts": {
     "style": "prettier --check ."
