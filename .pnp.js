@@ -38,7 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["prettier", "npm:2.2.0"],
-            ["prettier-plugin-java", "npm:0.8.3"]
+            ["prettier-plugin-java", "npm:1.0.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -59,16 +59,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["frc-2020-infinite-recharge", "workspace:."],
             ["prettier", "npm:2.2.0"],
-            ["prettier-plugin-java", "npm:0.8.3"]
+            ["prettier-plugin-java", "npm:1.0.0"]
           ],
           "linkType": "SOFT",
         }]
       ]],
       ["java-parser", [
-        ["npm:0.8.2", {
-          "packageLocation": "./.yarn/cache/java-parser-npm-0.8.2-c6ea62528a-8cb2a04130.zip/node_modules/java-parser/",
+        ["npm:1.0.0", {
+          "packageLocation": "./.yarn/cache/java-parser-npm-1.0.0-a5579b8921-839401593e.zip/node_modules/java-parser/",
           "packageDependencies": [
-            ["java-parser", "npm:0.8.2"],
+            ["java-parser", "npm:1.0.0"],
             ["chevrotain", "npm:6.5.0"],
             ["lodash", "npm:4.17.20"]
           ],
@@ -85,13 +85,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["prettier", [
-        ["npm:2.1.1", {
-          "packageLocation": "./.yarn/cache/prettier-npm-2.1.1-4096027ae9-420a807cda.zip/node_modules/prettier/",
-          "packageDependencies": [
-            ["prettier", "npm:2.1.1"]
-          ],
-          "linkType": "HARD",
-        }],
         ["npm:2.2.0", {
           "packageLocation": "./.yarn/cache/prettier-npm-2.2.0-9fa8f01d1a-fe7e2ac725.zip/node_modules/prettier/",
           "packageDependencies": [
@@ -101,13 +94,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["prettier-plugin-java", [
-        ["npm:0.8.3", {
-          "packageLocation": "./.yarn/cache/prettier-plugin-java-npm-0.8.3-f4536ff82b-8eb4085e5a.zip/node_modules/prettier-plugin-java/",
+        ["npm:1.0.0", {
+          "packageLocation": "./.yarn/cache/prettier-plugin-java-npm-1.0.0-19a48e44b4-e99a548fad.zip/node_modules/prettier-plugin-java/",
           "packageDependencies": [
-            ["prettier-plugin-java", "npm:0.8.3"],
-            ["java-parser", "npm:0.8.2"],
+            ["prettier-plugin-java", "npm:1.0.0"],
+            ["java-parser", "npm:1.0.0"],
             ["lodash", "npm:4.17.20"],
-            ["prettier", "npm:2.1.1"]
+            ["prettier", "npm:2.2.0"]
           ],
           "linkType": "HARD",
         }]
