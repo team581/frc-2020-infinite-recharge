@@ -239,8 +239,9 @@ gradle-app.setting
 # Yarn configuration with zero-installs enabled
 .yarn/*
 !.yarn/cache
-!.yarn/releases
+!.yarn/patches
 !.yarn/plugins
+!.yarn/releases
 !.yarn/sdks
 !.yarn/versions
 
