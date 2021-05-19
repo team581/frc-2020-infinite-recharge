@@ -19,17 +19,17 @@ __metadata:
   resolution: "frc-2020-infinite-recharge@workspace:."
   dependencies:
     prettier: 2.3.0
-    prettier-plugin-java: 1.0.2
+    prettier-plugin-java: 1.1.0
   languageName: unknown
   linkType: soft
 
-"java-parser@npm:1.0.2":
-  version: 1.0.2
-  resolution: "java-parser@npm:1.0.2"
+"java-parser@npm:1.1.0":
+  version: 1.1.0
+  resolution: "java-parser@npm:1.1.0"
   dependencies:
     chevrotain: 6.5.0
     lodash: 4.17.21
-  checksum: d7e502a56eeddc1d3c3ea7aeec26c5105ebe3bbd54f0b8fae5bd7bcfb62c87bd82c36626d9d76d6ba718d1db1095f93a74377856c2dcb512f71f274bbdfa667b
+  checksum: a891a0049e34f71c1b62b8ac3828af539d16fca209b00fad89bff0a7f8720c6eaffef937bb8faf0994f469b31f0d1c54c635e9baaec65f12ddad56e8b6f54456
   languageName: node
   linkType: hard
 
@@ -40,14 +40,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-java@npm:1.0.2":
-  version: 1.0.2
-  resolution: "prettier-plugin-java@npm:1.0.2"
+"prettier-plugin-java@npm:1.1.0":
+  version: 1.1.0
+  resolution: "prettier-plugin-java@npm:1.1.0"
   dependencies:
-    java-parser: 1.0.2
+    java-parser: 1.1.0
     lodash: 4.17.21
     prettier: 2.2.1
-  checksum: 7ba47d229383edf140833c40dc1a9c798f8a338628ee4b606e384749f9b8733b29ffd5008cee9a7a906953f07a3625b7c274e90f2e7d3c40c55e53582ed52fcd
+  checksum: 66fc54f10cdabc46e145f49e1b48f8eef9a479f7dfa875f3bd3218c541fe341854a689d7bd29955cc7e3cec197caa33e10fd8d530fd7c3c56665bfb66bb6fbbd
   languageName: node
   linkType: hard
 
